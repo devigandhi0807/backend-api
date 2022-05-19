@@ -25,6 +25,7 @@ import JwtTwoFactorGuard from 'src/common/guard/jwt-two-factor.guard';
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
 
 import { IHSLeaseVolFilterDto } from './dto/ihslease-vol-filter.dto';
+import { UpdateIHSLeaseVolDto } from './dto/update-ihslease-vol.dto';
 
 @ApiTags('IHSLeaseVOL')
 //@UseGuards(JwtTwoFactorGuard)
@@ -41,7 +42,13 @@ export class IhsleaseVolController {
     @Body()
     createIHSLeaseVolDto: CreateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
-    createIHSLeaseVolDto.user = req.user;
+    const userInfo: Object = req.user;
+    createIHSLeaseVolDto.user = userInfo;
+
+    if (userInfo.hasOwnProperty('name')) {
+      createIHSLeaseVolDto.created_by = userInfo['name'];
+    }
+
     return this.ihsLeaseVolService.create(createIHSLeaseVolDto);
   }
 
@@ -68,9 +75,14 @@ export class IhsleaseVolController {
     @Param('id')
     id: string,
     @Body()
-    updateIHSLeaseVolDto: CreateIHSLeaseVolDto
+    updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
-    updateIHSLeaseVolDto.user = req.user;
+    const userInfo: Object = req.user;
+    updateIHSLeaseVolDto.user = userInfo;
+    if (userInfo.hasOwnProperty('name')) {
+      updateIHSLeaseVolDto.updated_by = userInfo['name'];
+    }
+    updateIHSLeaseVolDto.updatedAt = new Date();
     return this.ihsLeaseVolService.update(+id, updateIHSLeaseVolDto);
   }
 

@@ -9,11 +9,12 @@ import { UserSerializer } from 'src/auth/serializer/user.serializer';
 import { ModelSerializer } from 'src/common/serializer/model.serializer';
 
 export const basicFieldGroupsForSerializing: string[] = ['basic'];
+export const ownerFieldGroupsForSerializing: string[] = ['owner'];
 export class IHSLeaseVolSerializer extends ModelSerializer {
   id: number;
 
   @ApiHideProperty()
-  @Expose({ groups: basicFieldGroupsForSerializing })
+  @Expose({ groups: ownerFieldGroupsForSerializing })
   @Type(() => UserSerializer)
   user: UserSerializer;
 
@@ -70,11 +71,11 @@ export class IHSLeaseVolSerializer extends ModelSerializer {
   @Expose({ groups: basicFieldGroupsForSerializing })
   rec_status: string;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
   created_by: string;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
   updated_by: string;
 

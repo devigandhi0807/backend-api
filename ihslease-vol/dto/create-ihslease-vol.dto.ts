@@ -60,11 +60,8 @@ export class CreateIHSLeaseVolDto {
   @IsString()
   rec_status: string;
 
-  @ApiProperty()
+  @ApiHideProperty()
+  @IsOptional()
   @IsString()
   created_by: string;
-
-  @ApiProperty()
-  @IsString()
-  updated_by: string;
 }

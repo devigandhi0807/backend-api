@@ -1,12 +1,6 @@
 import { UserEntity } from 'src/auth/entity/user.entity';
 import { CustomBaseEntity } from 'src/common/entity/custom-base.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
-import Decimal from 'decimal.js';
-import { Transform, Type } from 'class-transformer';
-import {
-  DecimalToString,
-  DecimalTransformer
-} from 'src/common/decimal-typorm/decimal.transformer';
 
 @Entity({ name: 'ihs_lease_vol' })
 export class IHSLeaseVolEntity extends CustomBaseEntity {

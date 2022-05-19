@@ -6,6 +6,7 @@ import { BaseRepository } from 'src/common/repository/base.repository';
 import { IHSLeaseVolEntity } from './entities/ihslease-vol.entity';
 import { IHSLeaseVolSerializer } from './serializer/ihslease-vol.serializer';
 import { CreateIHSLeaseVolDto } from './dto/create-ihslease-vol.dto';
+import { UpdateIHSLeaseVolDto } from './dto/update-ihslease-vol.dto';
 
 @EntityRepository(IHSLeaseVolEntity)
 export class IHSLeaseVolRepository extends BaseRepository<
@@ -22,7 +23,7 @@ export class IHSLeaseVolRepository extends BaseRepository<
 
   async updateItem(
     vol: IHSLeaseVolEntity,
-    updateIHSLeaseVolDto: CreateIHSLeaseVolDto
+    updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
     const fields = [
       'user',
@@ -36,8 +37,8 @@ export class IHSLeaseVolRepository extends BaseRepository<
       'gas_ytd',
       'oil_ytd',
       'rec_status',
-      'created_by',
-      'updated_by'
+      'updated_by',
+      'updatedAt'
     ];
     for (const field of fields) {
       if (updateIHSLeaseVolDto[field]) {

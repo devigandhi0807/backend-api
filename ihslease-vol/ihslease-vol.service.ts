@@ -15,6 +15,7 @@ import { IHSLeaseVolRepository } from './ihslease-vol.repository';
 import { CreateIHSLeaseVolDto } from './dto/create-ihslease-vol.dto';
 
 import { IHSLeaseVolFilterDto } from './dto/ihslease-vol-filter.dto';
+import { UpdateIHSLeaseVolDto } from './dto/update-ihslease-vol.dto';
 
 @Injectable()
 export class IhsleaseVolService
@@ -112,7 +113,7 @@ export class IhsleaseVolService
    */
   async update(
     id: number,
-    updateIHSLeaseVolDto: CreateIHSLeaseVolDto
+    updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
     const vol = await this.volRepository.findOne(id);
     if (!vol) {
