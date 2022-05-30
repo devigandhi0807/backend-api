@@ -101,7 +101,10 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_cum: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'numeric',
+    default: '0.00'
+  })
   @IsOptional()
   @IsNumber()
   wtr_cum: number;
@@ -120,7 +123,10 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_ytd: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'numeric',
+    default: '0.00'
+  })
   @IsOptional()
   @IsNumber()
   wtr_ytd: number;
@@ -139,7 +145,10 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_latest_mo: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'numeric',
+    default: '0.00'
+  })
   @IsOptional()
   @IsNumber()
   wtr_latest_mo: number;
@@ -180,12 +189,18 @@ export class CreateIHSProdByFieldOprDto {
   @IsString()
   gas_gatherer: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'numeric',
+    default: '0.00000000'
+  })
   @IsOptional()
   @IsNumber()
   latitude: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'numeric',
+    default: '0.00000000'
+  })
   @IsOptional()
   @IsNumber()
   longitude: number;
