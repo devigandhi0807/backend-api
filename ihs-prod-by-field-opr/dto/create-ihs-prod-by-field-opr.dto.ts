@@ -1,6 +1,7 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import { isNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { UserEntity } from 'src/auth/entity/user.entity';
+
 import { DeepPartial } from 'typeorm';
 
 export class CreateIHSProdByFieldOprDto {
@@ -10,6 +11,7 @@ export class CreateIHSProdByFieldOprDto {
   user: DeepPartial<UserEntity>;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   summary: string;
 
@@ -53,7 +55,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsString()
   state: string;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   country_name: string;
@@ -62,7 +64,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsString()
   basin: string;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   play_name: string;
@@ -71,12 +73,12 @@ export class CreateIHSProdByFieldOprDto {
   @IsString()
   production_status: string;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   resv_onshore: string;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   resv_offshore: string;
@@ -99,7 +101,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_cum: number;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsNumber()
   wtr_cum: number;
@@ -118,7 +120,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_ytd: number;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsNumber()
   wtr_ytd: number;
@@ -137,7 +139,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   gas_latest_mo: number;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsNumber()
   wtr_latest_mo: number;
@@ -178,17 +180,17 @@ export class CreateIHSProdByFieldOprDto {
   @IsString()
   gas_gatherer: string;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsNumber()
   latitude: number;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsNumber()
   longitude: number;
 
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   l_and_l_srce: string;

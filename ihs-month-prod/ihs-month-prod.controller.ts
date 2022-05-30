@@ -36,7 +36,7 @@ export class IhsMonthProdController {
     @Body()
     createIHSMonthProdDto: CreateIHSMonthProdDto
   ): Promise<IHSMonthProdSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     createIHSMonthProdDto.user = userInfo;
 
     if (userInfo.hasOwnProperty('name')) {
@@ -46,7 +46,7 @@ export class IhsMonthProdController {
   }
 
   @Get()
-  findAllIHSLeaseVol(
+  findAllMonthProd(
     @Query()
     prodFilterDto: IHSMonthProdFilterDto
   ): Promise<Pagination<IHSMonthProdSerializer>> {
@@ -54,7 +54,7 @@ export class IhsMonthProdController {
   }
 
   @Put(':id')
-  updateIHSMonthProd(
+  updateMonthProd(
     @Req()
     req: Request,
     @Param('id')
@@ -62,7 +62,7 @@ export class IhsMonthProdController {
     @Body()
     updateIHSMonthDto: UpdateIHSMonthProdDto
   ): Promise<IHSMonthProdSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     updateIHSMonthDto.user = userInfo;
     if (userInfo.hasOwnProperty('name')) {
       updateIHSMonthDto.updated_by = userInfo['name'];
@@ -72,7 +72,7 @@ export class IhsMonthProdController {
   }
 
   @Get('/prod/:id')
-  findOneIHSMonthProd(
+  findOneMonthProd(
     @Param('id')
     id: string
   ): Promise<IHSMonthProdSerializer> {
@@ -81,7 +81,7 @@ export class IhsMonthProdController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  removeIHSMonthProd(
+  removeMonthProd(
     @Param('id')
     id: string
   ): Promise<void> {

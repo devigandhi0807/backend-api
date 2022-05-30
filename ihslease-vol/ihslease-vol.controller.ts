@@ -20,7 +20,7 @@ import { CreateIHSLeaseVolDto } from 'src/ihslease-vol/dto/create-ihslease-vol.d
 import { IHSLeaseVolSerializer } from 'src/ihslease-vol/serializer/ihslease-vol.serializer';
 import { Pagination } from 'src/paginate';
 //import { PermissionGuard } from 'src/common/guard/permission.guard';
-import JwtTwoFactorGuard from 'src/common/guard/jwt-two-factor.guard';
+//import JwtTwoFactorGuard from 'src/common/guard/jwt-two-factor.guard';
 
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
 
@@ -36,13 +36,13 @@ export class IhsleaseVolController {
   constructor(private readonly ihsLeaseVolService: IhsleaseVolService) {}
 
   @Post('/createNewVol')
-  createIHSLeaseVol(
+  createLeaseVol(
     @Req()
     req: Request,
     @Body()
     createIHSLeaseVolDto: CreateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     createIHSLeaseVolDto.user = userInfo;
 
     if (userInfo.hasOwnProperty('name')) {
@@ -53,7 +53,7 @@ export class IhsleaseVolController {
   }
 
   @Get()
-  findAllIHSLeaseVol(
+  findAllLeaseVol(
     @Query()
     volFilterDto: IHSLeaseVolFilterDto
   ): Promise<Pagination<IHSLeaseVolSerializer>> {
@@ -61,7 +61,7 @@ export class IhsleaseVolController {
   }
 
   @Get('/vol/:id')
-  findOneIHSLeaseVol(
+  findOneLeaseVol(
     @Param('id')
     id: string
   ): Promise<IHSLeaseVolSerializer> {
@@ -69,7 +69,7 @@ export class IhsleaseVolController {
   }
 
   @Put(':id')
-  updateIHSLeaseVol(
+  updateLeaseVol(
     @Req()
     req: Request,
     @Param('id')
@@ -77,7 +77,7 @@ export class IhsleaseVolController {
     @Body()
     updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     updateIHSLeaseVolDto.user = userInfo;
     if (userInfo.hasOwnProperty('name')) {
       updateIHSLeaseVolDto.updated_by = userInfo['name'];
@@ -88,7 +88,7 @@ export class IhsleaseVolController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  removeIHSLeaseVol(
+  removeLeaseVol(
     @Param('id')
     id: string
   ): Promise<void> {

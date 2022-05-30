@@ -10,7 +10,9 @@ import {
   Put,
   Req,
   Query,
-  UseGuards
+  UseGuards,
+  UsePipes
+  // UseFilters
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateIHSProdByFieldOprDto } from './dto/create-ihs-prod-by-field-opr.dto';
@@ -21,6 +23,8 @@ import { IhsProdByFieldOprService } from './ihs-prod-by-field-opr.service';
 import { IHSProdByFieldOprSerializer } from './serializer/ihs-prod-by-field-opr.serializer';
 import { Pagination } from 'src/paginate';
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
+import { CustomValidationPipe } from 'src/common/pipes/custom-validation.pipe';
+//import { I18nExceptionFilterPipe } from 'src/common/pipes/i18n-exception-filter.pipe';
 
 @ApiTags('IHS-Prod-By-Field-Opr')
 @UseGuards(JwtAuthGuard)
@@ -32,13 +36,14 @@ export class IhsProdByFieldOprController {
   ) {}
 
   @Post('/new-prodby-fieldOpr')
+  @UsePipes(new CustomValidationPipe())
   createNewProdByFieldOpr(
     @Req()
     req: Request,
     @Body()
     createProdByFieldOprDto: CreateIHSProdByFieldOprDto
   ): Promise<IHSProdByFieldOprSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     createProdByFieldOprDto.user = userInfo;
 
     if (userInfo.hasOwnProperty('name')) {
@@ -48,7 +53,7 @@ export class IhsProdByFieldOprController {
   }
 
   @Get()
-  findAllIHSLeaseVol(
+  findAllProdByFieldOpr(
     @Query()
     prodFilterDto: IHSProdByFieldOprFilterDto
   ): Promise<Pagination<IHSProdByFieldOprSerializer>> {
@@ -56,7 +61,7 @@ export class IhsProdByFieldOprController {
   }
 
   @Put(':id')
-  updateIHSProdByFieldOpr(
+  updateProdByFieldOpr(
     @Req()
     req: Request,
     @Param('id')
@@ -64,7 +69,7 @@ export class IhsProdByFieldOprController {
     @Body()
     updateIHSProdByFieldOprDto: UpdateIHSProdByFieldOprDto
   ): Promise<IHSProdByFieldOprSerializer> {
-    const userInfo: Object = req.user;
+    const userInfo = req.user;
     updateIHSProdByFieldOprDto.user = userInfo;
     if (userInfo.hasOwnProperty('name')) {
       updateIHSProdByFieldOprDto.updated_by = userInfo['name'];
@@ -77,7 +82,7 @@ export class IhsProdByFieldOprController {
   }
 
   @Get('/prod/:id')
-  findOneIHSMonthProd(
+  findOneProdByFieldOpr(
     @Param('id')
     id: string
   ): Promise<IHSProdByFieldOprSerializer> {
@@ -86,7 +91,7 @@ export class IhsProdByFieldOprController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  removeIHSProdByFieldOpr(
+  removeProdByFieldOpr(
     @Param('id')
     id: string
   ): Promise<void> {
