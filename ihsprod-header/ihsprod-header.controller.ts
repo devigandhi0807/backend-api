@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 
 import { Pagination } from 'src/paginate';
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
@@ -33,6 +33,127 @@ export class IHSProdHeaderController {
   constructor(private readonly ihsProdHeaderService: IHSProdHeaderService) {}
 
   @Post('/new-prod-header')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        entity: {
+          type: 'string'
+        },
+        api: {
+          type: 'string'
+        },
+        source: {
+          type: 'string'
+        },
+        entity_type: {
+          type: 'string'
+        },
+        primary_product: {
+          type: 'string'
+        },
+        country_name: {
+          type: 'string'
+        },
+        province_state_name: {
+          type: 'string'
+        },
+        district_name: {
+          type: 'string'
+        },
+        county_name: {
+          type: 'string'
+        },
+        os_indicator: {
+          type: 'string'
+        },
+        basin: {
+          type: 'string'
+        },
+        operator_name: {
+          type: 'string'
+        },
+        operator_city: {
+          type: 'string'
+        },
+        field_name: {
+          type: 'string'
+        },
+        prod_zone_name: {
+          type: 'string'
+        },
+        lease_name: {
+          type: 'string'
+        },
+        lease_number: {
+          type: 'integer'
+        },
+
+        well_num: {
+          type: 'string'
+        },
+        location: {
+          type: 'string'
+        },
+        gatherer_gas: {
+          type: 'string'
+        },
+        gatherer_gas_name: {
+          type: 'string'
+        },
+        gatherer_liquid: {
+          type: 'string'
+        },
+        gatherer_liquid_name: {
+          type: 'string'
+        },
+        status_date: {
+          type: 'string',
+          format: 'date'
+        },
+
+        status_current_name: {
+          type: 'string'
+        },
+
+        date_production_start: {
+          type: 'string',
+          format: 'date'
+        },
+        date_production_stop: {
+          type: 'string',
+          format: 'date'
+        },
+        date_injection_start: {
+          type: 'string',
+          format: 'date'
+        },
+        date_injection_stop: {
+          type: 'string',
+          format: 'date'
+        },
+        pool_name: {
+          type: 'string'
+        },
+
+        temperature_gradient: {
+          type: 'numeric',
+          example: '"0.0000"',
+          description: 'this field is numeric type but value given as string '
+        },
+        n_factor: {
+          type: 'string'
+        },
+
+        rec_status: {
+          type: 'string',
+          description: 'The rec status A-Activated,D-Deleted',
+          default: 'A',
+          enum: ['A', 'D']
+        }
+      }
+    }
+  })
   createNewProdHeader(
     @Req()
     req: Request,

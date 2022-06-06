@@ -32,9 +32,6 @@ export class IhsMonthProdService
       prodFilterDto,
       ['user'],
       [
-        'entity',
-        'source',
-        'entity_type',
         'primary_product',
         'lease_name',
         'well_num',
@@ -43,16 +40,7 @@ export class IhsMonthProdService
         'operator_name',
         'year',
         'month',
-        'liquid',
-        'gas',
-        'water',
-        'ratio_gas_oil',
-        'percent_water',
-        'wells',
-        'days_on',
-        'rec_status',
-        'created_by',
-        'updated_by'
+        'days_on'
       ],
       {
         groups: [...basicFieldGroupsForSerializing]

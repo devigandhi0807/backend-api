@@ -1,4 +1,4 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { NotFoundException } from 'src/exception/not-found.exception';
@@ -66,20 +66,7 @@ export class IhsleaseVolService
     return this.volRepository.paginate(
       volFilterDto,
       ['user'],
-      [
-        'map_symbol',
-        'source',
-        'primary_api',
-        'lease_name',
-        'well_num',
-        'gas_cum',
-        'oil_cum',
-        'gas_ytd',
-        'oil_ytd',
-        'rec_status',
-        'created_by',
-        'updated_by'
-      ],
+      ['primary_api', 'lease_name', 'well_num'],
       {
         groups: [...basicFieldGroupsForSerializing]
       }

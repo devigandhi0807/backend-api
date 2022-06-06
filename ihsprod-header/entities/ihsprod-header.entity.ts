@@ -55,7 +55,7 @@ export class IHSProdHeaderEntity extends CustomBaseEntity {
   @Column({ type: 'varchar', length: 80, nullable: true })
   lease_name: string;
 
-  @Column({ type: 'int', width: 10, nullable: true })
+  @Column({ type: 'int8', width: 10, nullable: true })
   lease_number: number;
 
   @Column({ type: 'varchar', length: 10, nullable: true })

@@ -15,7 +15,7 @@ import {
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
 import { IhsMonthProdService } from './ihs-month-prod.service';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { CreateIHSMonthProdDto } from './dto/create-ihs-month-prod.dto';
 import { Pagination } from 'src/paginate';
 import { IHSMonthProdSerializer } from './serializer/ihs-month-prod.serializer';
@@ -30,6 +30,86 @@ export class IhsMonthProdController {
   constructor(private readonly ihsMonthProdService: IhsMonthProdService) {}
 
   @Post('/new-month-prod')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        entity: {
+          type: 'string'
+        },
+        source: {
+          type: 'string'
+        },
+
+        entity_type: {
+          type: 'string'
+        },
+        primary_product: {
+          type: 'string'
+        },
+        lease_name: {
+          type: 'string'
+        },
+        well_num: {
+          type: 'string'
+        },
+        api: {
+          type: 'string'
+        },
+        regulatory_api: {
+          type: 'string'
+        },
+        operator_name: {
+          type: 'string'
+        },
+        year: {
+          type: 'integer',
+          description: 'this field accept from 1900 to 2099 numbers'
+        },
+        month: {
+          type: 'string'
+        },
+
+        liquid: {
+          type: 'number',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string'
+        },
+        gas: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string'
+        },
+        water: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string'
+        },
+        ratio_gas_oil: {
+          type: 'numeric',
+          example: '"0.0000"',
+          description: 'this field is numeric type but value given as string'
+        },
+        percent_water: {
+          type: 'numeric',
+          example: '"0.0000"',
+          description: 'this field is numeric type but value given as string'
+        },
+        wells: {
+          type: 'integer'
+        },
+        days_on: {
+          type: 'integer'
+        },
+        rec_status: {
+          type: 'string',
+          description: 'The rec status A-Activated,D-Deleted',
+          default: 'A',
+          enum: ['A', 'D']
+        }
+      }
+    }
+  })
   createNewMonthProd(
     @Req()
     req: Request,
