@@ -26,36 +26,6 @@ export class IhsleaseVolService
     private volRepository: IHSLeaseVolRepository
   ) {}
 
-  // async getRefreshTokenByUserId(
-  //   userId: number,
-  //   filter: RefreshPaginateFilterDto
-  // ): Promise<Pagination<RefreshTokenSerializer>> {
-  //   const paginationInfo: PaginationInfoInterface =
-  //     this.repository.getPaginationInfo(filter);
-  //   const findOptions: FindManyOptions = {
-  //     where: {
-  //       userId,
-  //       isRevoked: false,
-  //       expires: MoreThanOrEqual(new Date())
-  //     }
-  //   };
-  //   const { page, skip, limit } = paginationInfo;
-  //   findOptions.take = paginationInfo.limit;
-  //   findOptions.skip = paginationInfo.skip;
-  //   findOptions.order = {
-  //     id: 'DESC'
-  //   };
-  //   const [results, total] = await this.repository.findAndCount(findOptions);
-  //   const serializedResult = this.repository.transformMany(results);
-  //   return new Pagination<RefreshTokenSerializer>({
-  //     results: serializedResult,
-  //     totalItems: total,
-  //     pageSize: limit,
-  //     currentPage: page,
-  //     previous: page > 1 ? page - 1 : 0,
-  //     next: total > skip + limit ? page + 1 : 0
-  //   });
-  //  }
   /**
    * Get all user paginated
    * @param volFilterDto
@@ -65,7 +35,7 @@ export class IhsleaseVolService
   ): Promise<Pagination<IHSLeaseVolSerializer>> {
     return this.volRepository.paginate(
       volFilterDto,
-      ['user'],
+      ['created_by', 'updated_by'],
       ['primary_api', 'lease_name', 'well_num'],
       {
         groups: [...basicFieldGroupsForSerializing]
@@ -78,7 +48,7 @@ export class IhsleaseVolService
    * @param id
    */
   async findOne(id: number): Promise<IHSLeaseVolSerializer> {
-    return this.volRepository.get(id, ['user'], {
+    return this.volRepository.get(id, ['created_by', 'updated_by'], {
       groups: [...basicFieldGroupsForSerializing]
     });
   }

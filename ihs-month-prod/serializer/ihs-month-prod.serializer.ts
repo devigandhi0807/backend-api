@@ -109,13 +109,15 @@ export class IHSMonthProdSerializer extends ModelSerializer {
   @Expose({ groups: basicFieldGroupsForSerializing })
   rec_status: string;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
-  created_by: string;
+  @Type(() => UserSerializer)
+  created_by: UserSerializer;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
-  updated_by: string;
+  @Type(() => UserSerializer)
+  updated_by: UserSerializer;
 
   @ApiPropertyOptional()
   @Expose({

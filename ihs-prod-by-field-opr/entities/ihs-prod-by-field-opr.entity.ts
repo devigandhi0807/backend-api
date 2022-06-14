@@ -4,8 +4,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_prod_by_field_opr' })
 export class IHSProdByFieldOprEntity extends CustomBaseEntity {
-  @ManyToOne(() => UserEntity, (user) => user.fieldOprs)
-  user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.createFieldOprs)
+  created_by: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.updateFieldOprs)
+  updated_by: UserEntity;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   summary: string;
@@ -187,10 +190,4 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
 
   @Column({ type: 'varchar', length: 5, default: 'A' })
   rec_status: string;
-
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  created_by: string;
-
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  updated_by: string;
 }

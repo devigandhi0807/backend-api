@@ -25,7 +25,6 @@ export class IHSProdByFieldOprRepository extends BaseRepository<
     updateIHSProdByFieldOprDto: UpdateIHSProdByFieldOprDto
   ): Promise<IHSProdByFieldOprSerializer> {
     const fields = [
-      'user',
       'summary',
       'source',
       'production_id',

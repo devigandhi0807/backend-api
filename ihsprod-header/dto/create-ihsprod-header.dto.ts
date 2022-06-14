@@ -1,6 +1,7 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
+  IsNotEmpty,
   IsNumber,
   IsNumberString,
   IsOptional,
@@ -12,6 +13,7 @@ import {
   MinLength,
   ValidationArguments
 } from 'class-validator';
+
 import { UserEntity } from 'src/auth/entity/user.entity';
 
 import { DeepPartial } from 'typeorm';
@@ -20,491 +22,263 @@ export class CreateIHSProdHeaderDto {
   @ApiHideProperty()
   @IsOptional()
   @IsNumber()
-  user: DeepPartial<UserEntity>;
+  created_by: DeepPartial<UserEntity>;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   entity: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   api: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   source: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(30, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":30,"count":30}'
   })
   entity_type: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(10, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":10,"count":10}'
   })
   primary_product: string;
 
   @ApiProperty()
   @IsString()
-  @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+  @MinLength(3, {
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(40, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":40,"count":40}'
   })
   country_name: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(40, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":40,"count":40}'
   })
   province_state_name: string;
 
   @ApiProperty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(40, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":40,"count":40}'
   })
   district_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(40, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":40,"count":40}'
   })
   county_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
-  @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+  @MaxLength(80, {
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   os_indicator: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
-  @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+  @MaxLength(20, {
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   basin: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   operator_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   operator_city: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   field_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   prod_zone_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   lease_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsNumber()
   @Min(0, {
-    message: () => {
-      return '$property Minimum Number is $constraint1';
+    message: (args: ValidationArguments) => {
+      if (args.value < 0) {
+        return 'min-{"ln":0}';
+      }
     }
   })
   @Max(9999999999, {
     message: (args: ValidationArguments) => {
       if (args.value > 9999999999) {
-        return (
-          '$property Maximum Number is $constraint1 , but ' +
-          args.value +
-          ' is out of range'
-        );
+        return 'max-{"dg":10}';
       }
     }
   })
   lease_number: number;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(1, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(10, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":10,"count":10}'
   })
   well_num: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   location: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   gatherer_gas: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   gatherer_gas_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property gatherer_liquid value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property gatherer_liquid is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property gatherer_liquid is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   gatherer_liquid: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
-  @MinLength(1, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+  @MinLength(3, {
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   gatherer_liquid_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsDateString()
   @Matches(
     /^([0-9]{4}|[0-9]{2})[./-]([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/,
@@ -515,27 +289,18 @@ export class CreateIHSProdHeaderDto {
   status_date: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   status_current_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsDateString()
   @Matches(
     /^([0-9]{4}|[0-9]{2})[./-]([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/,
@@ -546,6 +311,7 @@ export class CreateIHSProdHeaderDto {
   date_production_start: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsDateString()
   @Matches(
     /^([0-9]{4}|[0-9]{2})[./-]([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/,
@@ -556,6 +322,7 @@ export class CreateIHSProdHeaderDto {
   date_production_stop: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsDateString()
   @Matches(
     /^([0-9]{4}|[0-9]{2})[./-]([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/,
@@ -566,6 +333,7 @@ export class CreateIHSProdHeaderDto {
   date_injection_start: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsDateString()
   @Matches(
     /^([0-9]{4}|[0-9]{2})[./-]([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])$/,
@@ -576,23 +344,13 @@ export class CreateIHSProdHeaderDto {
   date_injection_stop: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   pool_name: string;
 
@@ -600,16 +358,9 @@ export class CreateIHSProdHeaderDto {
     type: 'numeric',
     default: '0.0000'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 4 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -618,38 +369,18 @@ export class CreateIHSProdHeaderDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 6) {
-          return (
-            '$property Maximum Digits of the whole number is 6 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,4)-{"dg":6,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 7) {
-          return (
-            '$property Maximum Digits of the whole number is 7 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,4)-{"dg":7,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -657,49 +388,24 @@ export class CreateIHSProdHeaderDto {
   temperature_gradient: number;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   n_factor: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(1, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":1,"count":1}'
   })
   @MaxLength(5, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":5,"count":5}'
   })
   rec_status: string;
-
-  @ApiHideProperty()
-  @IsOptional()
-  @IsString()
-  created_by: string;
 }

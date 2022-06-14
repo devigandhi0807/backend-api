@@ -1,5 +1,6 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import {
+  IsNotEmpty,
   IsNumber,
   IsNumberString,
   IsOptional,
@@ -18,194 +19,93 @@ export class CreateIHSMonthProdDto {
   @ApiHideProperty()
   @IsOptional()
   @IsNumber()
-  user: DeepPartial<UserEntity>;
+  created_by: DeepPartial<UserEntity>;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   entity: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   source: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   entity_type: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(10, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":10,"count":10}'
   })
   primary_product: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   lease_name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(10, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":10,"count":10}'
   })
   well_num: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":20,"count":20}'
   })
   api: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
-  })
-  @MaxLength(20, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
-  })
-  regulatory_api: string;
-
-  @ApiProperty()
-  @IsString()
-  @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(80, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":80,"count":80}'
   })
   operator_name: string;
 
@@ -217,23 +117,13 @@ export class CreateIHSMonthProdDto {
   year: number;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":3,"count":3}'
   })
   @MaxLength(10, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":10,"count":10}'
   })
   month: string;
 
@@ -241,16 +131,9 @@ export class CreateIHSMonthProdDto {
     type: 'numeric',
     default: '0.00'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 2 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -259,38 +142,18 @@ export class CreateIHSMonthProdDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 8) {
-          return (
-            '$property Maximum Digits of the whole number is 8 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,2)-{"dg":8,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 9) {
-          return (
-            '$property Maximum Digits of the whole number is 9 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,2)-{"dg":9,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -301,16 +164,9 @@ export class CreateIHSMonthProdDto {
     type: 'numeric',
     default: '0.00'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 2 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -319,38 +175,18 @@ export class CreateIHSMonthProdDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 8) {
-          return (
-            '$property Maximum Digits of the whole number is 8 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,2)-{"dg":8,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 9) {
-          return (
-            '$property Maximum Digits of the whole number is 9 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,2)-{"dg":9,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -361,16 +197,9 @@ export class CreateIHSMonthProdDto {
     type: 'numeric',
     default: '0.00'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 2 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -379,38 +208,18 @@ export class CreateIHSMonthProdDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 8) {
-          return (
-            '$property Maximum Digits of the whole number is 8 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,2)-{"dg":8,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 9) {
-          return (
-            '$property Maximum Digits of the whole number is 9 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,2)-{"dg":9,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 2) {
-          return (
-            '$property Maximum Digits of the precision is 2 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,2)-{"dg":2,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -421,16 +230,9 @@ export class CreateIHSMonthProdDto {
     type: 'numeric',
     default: '0.0000'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 4 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -439,38 +241,18 @@ export class CreateIHSMonthProdDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 6) {
-          return (
-            '$property Maximum Digits of the whole number is 6 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,4)-{"dg":6,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 7) {
-          return (
-            '$property Maximum Digits of the whole number is 7 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,4)-{"dg":7,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -481,16 +263,9 @@ export class CreateIHSMonthProdDto {
     type: 'numeric',
     default: '0.0000'
   })
+  @IsNotEmpty()
   @MinLength(2, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return (
-          '$property must be numeric with the maximun precision is 4 digits. the given input value is empty' +
-          args.value
-        );
-      }
-      return '$property Minimum Digit is $constraint1 digits ' + args.value;
-    }
+    message: 'minDigit-{"dg":2}'
   })
   @MaxLength(12, {
     message: (args: ValidationArguments) => {
@@ -499,38 +274,18 @@ export class CreateIHSMonthProdDto {
         (args.value.length === 12 || args.value.length > 12)
       ) {
         if (args.value.split('.')[0].length > 6) {
-          return (
-            '$property Maximum Digits of the whole number is 6 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(+ve)(10,4)-{"dg":6,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(+ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is ' +
-          args.value
-        );
       } else if (args.value.indexOf('-') === 0 && args.value.length > 12) {
         if (args.value.split('.')[0].length > 7) {
-          return (
-            '$property Maximum Digits of the whole number is 7 digits including -ve sign(-). the given input value is ' +
-            args.value
-          );
+          return 'maxDigitW(-ve)(10,4)-{"dg":7,"org":' + args.value + '}';
         }
         if (args.value.split('.')[1].length > 4) {
-          return (
-            '$property Maximum Digits of the precision is 4 digits. the given input value is ' +
-            args.value
-          );
+          return 'maxDigitP(-ve)(10,4)-{"dg":4,"org":' + args.value + '}';
         }
-        return (
-          '$property Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is ' +
-          args.value
-        );
       }
     }
   })
@@ -540,18 +295,16 @@ export class CreateIHSMonthProdDto {
   @ApiProperty()
   @IsNumber()
   @Min(0, {
-    message: () => {
-      return '$property Minimum Number is $constraint1';
+    message: (args: ValidationArguments) => {
+      if (args.value < 0) {
+        return 'min-{"ln":0}';
+      }
     }
   })
   @Max(9999, {
     message: (args: ValidationArguments) => {
       if (args.value > 9999) {
-        return (
-          '$property Maximum Number is $constraint1 , but ' +
-          args.value +
-          ' is out of range'
-        );
+        return 'max-{"dg":4}';
       }
     }
   })
@@ -560,18 +313,16 @@ export class CreateIHSMonthProdDto {
   @ApiProperty()
   @IsNumber()
   @Min(0, {
-    message: () => {
-      return '$property Minimum Number is $constraint1';
+    message: (args: ValidationArguments) => {
+      if (args.value < 0) {
+        return 'min-{"ln":0}';
+      }
     }
   })
   @Max(999999, {
     message: (args: ValidationArguments) => {
       if (args.value > 999999) {
-        return (
-          '$property Maximum Number is $constraint1 , but ' +
-          args.value +
-          ' is out of range'
-        );
+        return 'max-{"dg":6}';
       }
     }
   })
@@ -580,26 +331,10 @@ export class CreateIHSMonthProdDto {
   @ApiProperty()
   @IsString()
   @MinLength(1, {
-    message: (args: ValidationArguments) => {
-      if (args.value.length === 0) {
-        return '$property value is empty. Minimum length is $constraint1 characters.';
-      } else {
-        return (
-          '$property is too short. Minimum length is ' +
-          args.constraints[0] +
-          ' characters, but actual is $value'
-        );
-      }
-    }
+    message: 'minLength-{"ln":1,"count":1}'
   })
   @MaxLength(5, {
-    message:
-      '$property is too long. Maximal length is $constraint1 characters, but actual is $value'
+    message: 'maxLength-{"ln":5,"count":5}'
   })
   rec_status: string;
-
-  @ApiHideProperty()
-  @IsOptional()
-  @IsString()
-  created_by: string;
 }

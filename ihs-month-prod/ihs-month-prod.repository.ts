@@ -26,7 +26,6 @@ export class IHSMonthProdRepository extends BaseRepository<
     updateIHSLeaseVolDto: UpdateIHSMonthProdDto
   ): Promise<IHSMonthProdSerializer> {
     const fields = [
-      'user',
       'entity',
       'source',
       'entity_type',

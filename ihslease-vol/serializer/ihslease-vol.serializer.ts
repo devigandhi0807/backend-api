@@ -4,7 +4,7 @@ import {
   ApiPropertyOptional
 } from '@nestjs/swagger';
 
-import { Expose, Type, Transform } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { UserSerializer } from 'src/auth/serializer/user.serializer';
 import { ModelSerializer } from 'src/common/serializer/model.serializer';
 
@@ -14,9 +14,14 @@ export class IHSLeaseVolSerializer extends ModelSerializer {
   id: number;
 
   @ApiHideProperty()
-  @Expose({ groups: ownerFieldGroupsForSerializing })
+  @Expose({ groups: basicFieldGroupsForSerializing })
   @Type(() => UserSerializer)
-  user: UserSerializer;
+  created_by: UserSerializer;
+
+  @ApiHideProperty()
+  @Expose({ groups: basicFieldGroupsForSerializing })
+  @Type(() => UserSerializer)
+  updated_by: UserSerializer;
 
   @ApiProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
@@ -71,13 +76,13 @@ export class IHSLeaseVolSerializer extends ModelSerializer {
   @Expose({ groups: basicFieldGroupsForSerializing })
   rec_status: string;
 
-  @ApiHideProperty()
-  @Expose({ groups: basicFieldGroupsForSerializing })
-  created_by: string;
+  // @ApiHideProperty()
+  // @Expose({ groups: basicFieldGroupsForSerializing })
+  // created_by: string;
 
-  @ApiHideProperty()
-  @Expose({ groups: basicFieldGroupsForSerializing })
-  updated_by: string;
+  // @ApiHideProperty()
+  // @Expose({ groups: basicFieldGroupsForSerializing })
+  // updated_by: string;
 
   @ApiPropertyOptional()
   @Expose({

@@ -32,7 +32,7 @@ export class IHSProdHeaderService
   ): Promise<Pagination<IHSProdHeaderSerializer>> {
     return this.headerRepository.paginate(
       headerFilterDto,
-      ['user'],
+      ['created_by', 'updated_by'],
       [
         'entity',
         'api',
@@ -63,7 +63,7 @@ export class IHSProdHeaderService
     );
   }
   findOne(id: number): Promise<IHSProdHeaderSerializer> {
-    return this.headerRepository.get(id, ['user'], {
+    return this.headerRepository.get(id, ['created_by', 'updated_by'], {
       groups: [...basicFieldGroupsForSerializing]
     });
   }

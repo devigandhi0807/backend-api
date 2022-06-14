@@ -30,7 +30,7 @@ export class IhsMonthProdService
   ): Promise<Pagination<IHSMonthProdSerializer>> {
     return this.prodRepository.paginate(
       prodFilterDto,
-      ['user'],
+      ['created_by', 'updated_by'],
       [
         'primary_product',
         'lease_name',
@@ -48,7 +48,7 @@ export class IhsMonthProdService
     );
   }
   findOne(id: number): Promise<IHSMonthProdSerializer> {
-    return this.prodRepository.get(id, ['user'], {
+    return this.prodRepository.get(id, ['created_by', 'updated_by'], {
       groups: [...basicFieldGroupsForSerializing]
     });
   }

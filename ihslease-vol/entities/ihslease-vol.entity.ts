@@ -4,8 +4,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_lease_vol' })
 export class IHSLeaseVolEntity extends CustomBaseEntity {
-  @ManyToOne(() => UserEntity, (user) => user.vols)
-  user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.createVols)
+  created_by: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.updateVols)
+  updated_by: UserEntity;
 
   @Column({ type: 'varchar', length: 80, nullable: true })
   map_symbol: string;
@@ -61,9 +64,9 @@ export class IHSLeaseVolEntity extends CustomBaseEntity {
 
   @Column({ type: 'varchar', length: 5, nullable: true })
   rec_status: string;
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  created_by: string;
+  // @Column({ type: 'varchar', length: 30, nullable: true })
+  // created_by: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  updated_by: string;
+  // @Column({ type: 'varchar', length: 30, nullable: true })
+  // updated_by: string;
 }

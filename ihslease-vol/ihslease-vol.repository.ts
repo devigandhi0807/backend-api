@@ -26,7 +26,6 @@ export class IHSLeaseVolRepository extends BaseRepository<
     updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
     const fields = [
-      'user',
       'map_symbol',
       'source',
       'primary_api',

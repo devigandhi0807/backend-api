@@ -1,14 +1,15 @@
 import { ApiHideProperty, OmitType } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional } from 'class-validator';
+import { UserEntity } from 'src/auth/entity/user.entity';
 import { CreateIHSProdHeaderDto } from './create-ihsprod-header.dto';
-
+import { DeepPartial } from 'typeorm';
 export class UpdateIHSProdHeaderDto extends OmitType(CreateIHSProdHeaderDto, [
   'created_by' as const
 ]) {
   @ApiHideProperty()
   @IsOptional()
-  @IsString()
-  updated_by: string;
+  @IsNumber()
+  updated_by: DeepPartial<UserEntity>;
 
   @ApiHideProperty()
   @IsOptional()

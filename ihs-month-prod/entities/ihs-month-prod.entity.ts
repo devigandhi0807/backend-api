@@ -4,8 +4,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_month_prod' })
 export class IHSMonthProdEntity extends CustomBaseEntity {
-  @ManyToOne(() => UserEntity, (user) => user.prods)
-  user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.createProds)
+  created_by: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.updateProds)
+  updated_by: UserEntity;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   entity: string;
@@ -88,10 +91,4 @@ export class IHSMonthProdEntity extends CustomBaseEntity {
 
   @Column({ type: 'varchar', length: 5, nullable: true })
   rec_status: string;
-
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  created_by: string;
-
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  updated_by: string;
 }

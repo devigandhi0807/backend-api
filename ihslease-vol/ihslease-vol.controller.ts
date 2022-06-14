@@ -91,11 +91,11 @@ export class IhsleaseVolController {
     createIHSLeaseVolDto: CreateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
     const userInfo = req.user;
-    createIHSLeaseVolDto.user = userInfo;
+    createIHSLeaseVolDto.created_by = userInfo;
 
-    if (userInfo.hasOwnProperty('name')) {
-      createIHSLeaseVolDto.created_by = userInfo['name'];
-    }
+    // if (userInfo.hasOwnProperty('name')) {
+    //   createIHSLeaseVolDto.created_by = userInfo['name'];
+    // }
 
     return this.ihsLeaseVolService.create(createIHSLeaseVolDto);
   }
@@ -117,6 +117,54 @@ export class IhsleaseVolController {
   }
 
   @Put(':id')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        map_symbol: {
+          type: 'string'
+        },
+        source: {
+          type: 'string'
+        },
+        primary_api: {
+          type: 'string'
+        },
+        lease_name: {
+          type: 'string'
+        },
+        well_num: {
+          type: 'string'
+        },
+        gas_cum: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string '
+        },
+        oil_cum: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string '
+        },
+        gas_ytd: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string '
+        },
+        oil_ytd: {
+          type: 'numeric',
+          example: '"0.00"',
+          description: 'this field is numeric type but value given as string '
+        },
+        rec_status: {
+          type: 'string',
+          description: 'The rec status A-Activated,D-Deleted',
+          default: 'A',
+          enum: ['A', 'D']
+        }
+      }
+    }
+  })
   updateLeaseVol(
     @Req()
     req: Request,
@@ -126,10 +174,10 @@ export class IhsleaseVolController {
     updateIHSLeaseVolDto: UpdateIHSLeaseVolDto
   ): Promise<IHSLeaseVolSerializer> {
     const userInfo = req.user;
-    updateIHSLeaseVolDto.user = userInfo;
-    if (userInfo.hasOwnProperty('name')) {
-      updateIHSLeaseVolDto.updated_by = userInfo['name'];
-    }
+    updateIHSLeaseVolDto.updated_by = userInfo;
+    // if (userInfo.hasOwnProperty('name')) {
+    //   updateIHSLeaseVolDto.updated_by = userInfo['name'];
+    // }
     updateIHSLeaseVolDto.updatedAt = new Date();
     return this.ihsLeaseVolService.update(+id, updateIHSLeaseVolDto);
   }

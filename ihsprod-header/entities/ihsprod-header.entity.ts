@@ -4,8 +4,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_prod_header' })
 export class IHSProdHeaderEntity extends CustomBaseEntity {
-  @ManyToOne(() => UserEntity, (user) => user.headers)
-  user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.createHeaders)
+  created_by: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.updateHeaders)
+  updated_by: UserEntity;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   entity: string;
@@ -123,9 +126,9 @@ export class IHSProdHeaderEntity extends CustomBaseEntity {
   @Column({ type: 'varchar', length: 5, default: 'A' })
   rec_status: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  created_by: string;
+  // @Column({ type: 'varchar', length: 30, nullable: true })
+  // created_by: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
-  updated_by: string;
+  // @Column({ type: 'varchar', length: 30, nullable: true })
+  // updated_by: string;
 }

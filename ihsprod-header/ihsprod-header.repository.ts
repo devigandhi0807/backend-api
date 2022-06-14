@@ -25,7 +25,6 @@ export class IHSProdHeaderRepository extends BaseRepository<
     updateIHSProdHeaderDto: UpdateIHSProdHeaderDto
   ): Promise<IHSProdHeaderSerializer> {
     const headers = [
-      'user',
       'entity',
       'api',
       'source',

@@ -13,11 +13,6 @@ export const ownerFieldGroupsForSerializing: string[] = ['owner'];
 export class IHSProdByFieldOprSerializer extends ModelSerializer {
   id: number;
 
-  @ApiHideProperty()
-  @Expose({ groups: ownerFieldGroupsForSerializing })
-  @Type(() => UserSerializer)
-  user: UserSerializer;
-
   @ApiProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
   summary: string;
@@ -196,13 +191,15 @@ export class IHSProdByFieldOprSerializer extends ModelSerializer {
   @Expose({ groups: basicFieldGroupsForSerializing })
   rec_status: string;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
-  created_by: string;
+  @Type(() => UserSerializer)
+  created_by: UserSerializer;
 
-  @ApiProperty()
+  @ApiHideProperty()
   @Expose({ groups: basicFieldGroupsForSerializing })
-  updated_by: string;
+  @Type(() => UserSerializer)
+  updated_by: UserSerializer;
 
   @ApiPropertyOptional()
   @Expose({
