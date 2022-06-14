@@ -1,0 +1,46 @@
+{
+  "character": {
+    "one": "character",
+    "other": "characters",
+    "zero": "character"
+  },
+  "digit": {
+    "1": "digit",
+    "0": "digit"
+  },
+  "Unauthorized": "Invalid email/password",
+  "isNotEmpty": "$t(app.{property}) should not be empty",
+  "maxLength": "$t(app.{property}) can only have maximum length of {ln} $t(validation.character, {{\"count\": {count} }})",
+  "isPositive": "$t(app.{property}) should be +ve number",
+  "minLength": "$t(app.{property}) must have minimum length of {ln} $t(validation.character, {{\"count\": {count} }})",
+  "min": "$t(app.{property}) must have greater than or equal to {ln}",
+  "max": "$t(app.{property}) must have less than or equal to {dg} digits.",
+  "password should contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character": "password should contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character",
+  "isIn": "$t(app.{property}) must be one of {items}",
+  "isEnum": "$t(app.{property}) must be one of {items}",
+  "isNumberString": "$t(app.{property}) must be number string",
+  "isNumber": "$t(app.{property}) must be number",
+  "isEqualTo": "$t(app.{property}) must be same as $t(app.{field})",
+  "isLowercase": "$t(app.{property}) should be in lowercase",
+  "isEmail": "$t(app.{property}) must be valid email",
+  "isString": "$t(app.{property}) must be string",
+  "isBoolean": "field must be selected between true or false",
+  "already taken": "$t(app.{property}) is already taken",
+  "unique": "$t(app.{property}) is already taken",
+  "minDigit": "$t(app.{property}) have minimum of {dg} digit.",
+  "maxDigitW(+ve)(10,2)": "$t(app.{property}) have Maximum Digits of the whole number is {dg} digits.Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is {org}",
+  "maxDigitP(+ve)(10,2)": "$t(app.{property}) have Maximum Precision of {dg} digits.the given input value is {org}.Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is {org}",
+
+  "maxDigitW(-ve)(10,2)":"$t(app.{property}) have Maximum Digits of the whole number is {dg} digits including -ve sign(-).the given input value is {org}.Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is",
+  "maxDigitP(-ve)(10,2)":"$t(app.{property}) have Maximum Precision of {dg} digits.the given input value is {org}.Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is {org}",
+  "maxDigitW(+ve)(10,4)": "$t(app.{property}) have Maximum Digits of the whole number is {dg} digits.Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is {org}",
+  "maxDigitP(+ve)(10,4)": "$t(app.{property}) have Maximum Precision of {dg} digits.the given input value is {org}.Maximum Digits are 11 digits including dot(.) if it is +ve numeric number. the given input value is {org}",
+
+  "maxDigitW(-ve)(10,4)":"$t(app.{property}) have Maximum Digits of the whole number is {dg} digits including -ve sign(-).the given input value is {org}.Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is",
+  "maxDigitP(-ve)(10,4)":"$t(app.{property}) have Maximum Precision of {dg} digits.the given input value is {org}.Maximum Digits are 12 digits including dot(.) and -ve sign(-) if it is -ve numeric number.the given input value is {org}",
+  "minNumber": "$t(app.{property}) must have greater than 0 but the given input value is {org}.",
+  "isDateString": "$t(app.{property}) must be ISO8601 (yyyy-mm-dd) format",
+  "isLatitude": "$t(app.{property}) must be valid latitude",
+  "isLongitude": "$t(app.{property}) must be valid longitude"
+
+}
