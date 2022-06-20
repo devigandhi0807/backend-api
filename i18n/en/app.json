@@ -92,5 +92,18 @@
   "gas_gatherer": "gas gatherer",
   "latitude": "latitude",
   "longitude": "longitude",
-  "l_and_l_srce": "l_and_l_srce"
+  "l_and_l_srce": "l_and_l_srce",
+  "section":"section",
+  "township":"township",
+  "range":"range",
+  "unit_order_link":"unit_order_link",
+  "State": "State",
+  "tract_no": "tract no",
+  "Unit_order_id": "Unit order id",
+  "gross_area_in_acres": "gross area in acres",
+  "net_area_in_acres": "net area in acres",
+  "pct_of_unit": "pct of unit",
+  "interest_type": "interest type",
+  "ownership_display_name": "ownership display name",
+  "cur_notes": "cur notes"
 }
