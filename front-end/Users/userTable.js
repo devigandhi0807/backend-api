@@ -7,7 +7,7 @@ import {
   setPageNumberAction,
   setPageSizeAction,
 } from 'containers/Users/actions';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Dropdown, Space, Menu } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import {
   makeIsLoadingSelector,
@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import { PUT } from 'utils/constants';
 import { EditOutlined, FolderViewOutlined } from '@ant-design/icons';
 import ToolTipButtonWrapper from 'components/ToolTipButtonWrapper';
+import { NavLink } from 'react-router-dom';
 
 const stateSelector = createStructuredSelector({
   isLoading: makeIsLoadingSelector(),
@@ -74,82 +75,91 @@ function UserTable(props) {
         return 'primary';
     }
   };
-
+  const listMenu = (id) => (
+    <Menu>
+      <Menu.Item key={Math.random() * id}>
+        <ToolTipButtonWrapper
+          title={commonMessages.editLabel}
+          clickEvent={() => onEdit(id)}
+        >
+          <EditOutlined />
+        </ToolTipButtonWrapper>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key={Math.random() * id}>
+        <ToolTipButtonWrapper
+          title={commonMessages.viewLabel}
+          clickEvent={() => onView(id)}
+        >
+          <FolderViewOutlined />
+        </ToolTipButtonWrapper>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <>
-      <Table
-        loading={isLoading}
-        pagination={paginationOptions}
-        rowKey="id"
-        dataSource={users.results}
-        scroll={{ x: 500 }}
-      >
-        <Table.Column
-          title={intl.formatMessage(commonMessages.nameLabel)}
-          dataIndex="name"
-          width={100}
-          render={(_, { name }) => name}
-        />
-        <Table.Column
-          title={intl.formatMessage(commonMessages.emailLabel)}
-          dataIndex="email"
-          key="email"
-          width={100}
-        />
-        <Table.Column
-          title={intl.formatMessage(commonMessages.usernameLabel)}
-          dataIndex="username"
-          key="username"
-          width={100}
-        />
-        <Table.Column
-          title={intl.formatMessage(messages.statusLabel)}
-          dataIndex="status"
-          key="status"
-          render={(_, { status }) => (
-            <Tag color={getStatusClass(status)}>{status}</Tag>
-          )}
-          width={100}
-        />
-        <Table.Column
-          title={intl.formatMessage(messages.dateLabel)}
-          dataIndex="createdAt"
-          key="createdAt"
-          render={(_, { createdAt }) => (
-            <FormattedMessage
-              {...messages.createdAt}
-              values={{ ts: Date.parse(createdAt) }}
-            />
-          )}
-          width={100}
-        />
-        <Table.Column
-          title={intl.formatMessage(messages.actionLabel)}
-          width={200}
-          dataIndex="id"
-          key="action"
-          align="center"
-          render={(_, { id }) =>
-            checkPermissionForComponent(user.role, EditRoutePermission) ? (
-              <>
-                <ToolTipButtonWrapper
-                  title={commonMessages.editLabel}
-                  clickEvent={() => onEdit(id)}
-                >
-                  <EditOutlined />
-                </ToolTipButtonWrapper>
-                <ToolTipButtonWrapper
-                  title={commonMessages.viewLabel}
-                  clickEvent={() => onView(id)}
-                >
-                  <FolderViewOutlined />
-                </ToolTipButtonWrapper>
-              </>
-            ) : null
-          }
-        />
-      </Table>
-    </>
+    <Table
+      loading={isLoading}
+      pagination={paginationOptions}
+      rowKey="id"
+      dataSource={users.results}
+      scroll={{ x: 500 }}
+    >
+      <Table.Column
+        title={intl.formatMessage(commonMessages.nameLabel)}
+        dataIndex="name"
+        width={100}
+        render={(_, { name }) => name}
+      />
+      <Table.Column
+        title={intl.formatMessage(commonMessages.emailLabel)}
+        dataIndex="email"
+        key="email"
+        width={100}
+      />
+      <Table.Column
+        title={intl.formatMessage(commonMessages.usernameLabel)}
+        dataIndex="username"
+        key="username"
+        width={100}
+      />
+      <Table.Column
+        title={intl.formatMessage(messages.statusLabel)}
+        dataIndex="status"
+        key="status"
+        render={(_, { status }) => (
+          <Tag color={getStatusClass(status)}>{status}</Tag>
+        )}
+        width={100}
+      />
+      <Table.Column
+        title={intl.formatMessage(messages.dateLabel)}
+        dataIndex="createdAt"
+        key="createdAt"
+        render={(_, { createdAt }) => (
+          <FormattedMessage
+            {...messages.createdAt}
+            values={{ ts: Date.parse(createdAt) }}
+          />
+        )}
+        width={100}
+      />
+      <Table.Column
+        title={intl.formatMessage(messages.actionLabel)}
+        width={50}
+        dataIndex="id"
+        key="action"
+        align="center"
+        render={(_, { id }) =>
+          checkPermissionForComponent(user.role, EditRoutePermission) ? (
+            <Dropdown overlay={() => listMenu(id)} trigger={['click']}>
+              <NavLink to="#" onClick={(e) => e.preventDefault()}>
+                <Space>...</Space>
+              </NavLink>
+            </Dropdown>
+          ) : null
+        }
+      />
+    </Table>
   );
 }
 
