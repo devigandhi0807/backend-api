@@ -1,4 +1,4 @@
-import { EntityRepository } from 'typeorm';
+import { EntityRepository, ILike } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -44,6 +44,52 @@ export class UnitOrderDetailRepository extends BaseRepository<
     }
     await UnitOrderDetail.save();
     return this.transform(UnitOrderDetail);
+  }
+
+  pharseFilterQuery(searchFilter, searchCriteria) {
+    const whereCondition = [];
+    if (searchFilter.hasOwnProperty('keywords') && searchFilter.keywords) {
+      for (const key of searchCriteria) {
+        if (key === 'Unit_order_id' || key === 'interest_type') {
+          if (!isNaN(parseInt(searchFilter.keywords))) {
+            const val = parseInt(`${searchFilter.keywords}`);
+            whereCondition.push({
+              [key]: Number(val)
+            });
+          }
+        } else {
+          whereCondition.push({
+            [key]: ILike(`%${searchFilter[key]}%`)
+          });
+        }
+      }
+    } else if (
+      (searchFilter.hasOwnProperty('tract_no') && searchFilter.tract_no) ||
+      (searchFilter.hasOwnProperty('Unit_order_id') &&
+        searchFilter.Unit_order_id) ||
+      (searchFilter.hasOwnProperty('interest_type') &&
+        searchFilter.interest_type) ||
+      (searchFilter.hasOwnProperty('ownership_display_name') &&
+        searchFilter.ownership_display_name)
+    ) {
+      for (const key of searchCriteria) {
+        if (key === 'interest_type' || key === 'Unit_order_id') {
+          if (!isNaN(parseInt(searchFilter[key]))) {
+            const val = parseInt(`${searchFilter[key]}`);
+
+            whereCondition.push({
+              [key]: Number(val)
+            });
+          }
+        } else {
+          whereCondition.push({
+            [key]: ILike(`%${searchFilter[key]}%`)
+          });
+        }
+      }
+    }
+    //console.log(whereCondition);
+    return whereCondition;
   }
 
   /**

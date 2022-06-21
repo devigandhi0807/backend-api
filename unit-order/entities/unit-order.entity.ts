@@ -13,7 +13,10 @@ export class UnitOrderEntity extends CustomBaseEntity {
 
   @OneToMany(
     () => UnitOrderDetailEntity,
-    (unitOrderDetail) => unitOrderDetail.Unit_order_id
+    (unitOrderDetail) => unitOrderDetail.Unit_order_id,
+    {
+      cascade: true
+    }
   )
   unitOrderDetails: UnitOrderDetailEntity[];
 

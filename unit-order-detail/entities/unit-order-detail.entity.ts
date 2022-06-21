@@ -11,7 +11,9 @@ export class UnitOrderDetailEntity extends CustomBaseEntity {
   @ManyToOne(() => UserEntity, (user) => user.updateOrders)
   updated_by: UserEntity;
 
-  @ManyToOne(() => UnitOrderEntity, (unitOrder) => unitOrder.unitOrderDetails)
+  @ManyToOne(() => UnitOrderEntity, (unitOrder) => unitOrder.unitOrderDetails, {
+    onDelete: 'CASCADE'
+  })
   Unit_order_id: UnitOrderEntity;
 
   @Column({ type: 'varchar', length: 10, nullable: true })

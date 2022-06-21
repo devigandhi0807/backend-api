@@ -46,7 +46,7 @@ export class UnitOrderController {
         county_name: {
           type: 'array',
           items: {
-            $ref: '#/unit-order'
+            type: 'string'
           }
         },
         section: {
@@ -116,7 +116,7 @@ export class UnitOrderController {
         county_name: {
           type: 'array',
           items: {
-            $ref: '#/unit-order'
+            type: 'string'
           }
         },
         section: {

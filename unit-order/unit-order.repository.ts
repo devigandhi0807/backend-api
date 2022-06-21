@@ -1,4 +1,4 @@
-import { EntityRepository } from 'typeorm';
+import { EntityRepository, ILike } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -44,6 +44,30 @@ export class UnitOrderRepository extends BaseRepository<
     }
     await unit.save();
     return this.transform(unit);
+  }
+
+  pharseFilterQuery(searchFilter, searchCriteria) {
+    const whereCondition = [];
+    if (searchFilter.hasOwnProperty('keywords') && searchFilter.keywords) {
+      for (const key of searchCriteria) {
+        whereCondition.push({
+          [key]: ILike(`%${searchFilter[key]}%`)
+        });
+      }
+    } else if (
+      (searchFilter.hasOwnProperty('operator_name') &&
+        searchFilter.operator_name) ||
+      (searchFilter.hasOwnProperty('township') && searchFilter.township) ||
+      (searchFilter.hasOwnProperty('section') && searchFilter.section)
+    ) {
+      for (const key of searchCriteria) {
+        whereCondition.push({
+          [key]: ILike(`%${searchFilter[key]}%`)
+        });
+      }
+    }
+    //console.log(whereCondition);
+    return whereCondition;
   }
 
   /**
