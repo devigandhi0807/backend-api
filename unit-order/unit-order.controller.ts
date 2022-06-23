@@ -19,7 +19,7 @@ import { UnitOrderService } from 'src/unit-order/unit-order.service';
 import { CreateUnitOrderDto } from 'src/unit-order/dto/create-unit-order.dto';
 import { UnitOrderSerializer } from 'src/unit-order/serializer/unit-order.serializer';
 import { Pagination } from 'src/paginate';
-//import { PermissionGuard } from 'src/common/guard/permission.guard';
+import { PermissionGuard } from 'src/common/guard/permission.guard';
 //import JwtTwoFactorGuard from 'src/common/guard/jwt-two-factor.guard';
 
 import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
@@ -95,6 +95,13 @@ export class UnitOrderController {
     unitFilterDto: UnitOrderFilterDto
   ): Promise<Pagination<UnitOrderSerializer>> {
     return this.unitOrderService.findAll(unitFilterDto);
+  }
+  @Get(':id/count')
+  unitOrderDetailsCount(
+    @Param('id')
+    id: string
+  ): Promise<UnitOrderSerializer> {
+    return this.unitOrderService.unitOrderDetailsCount(+id);
   }
 
   @Get(':id')

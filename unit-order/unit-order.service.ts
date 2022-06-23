@@ -84,4 +84,19 @@ export class UnitOrderService
     await this.findOne(id);
     await this.unitRepository.delete({ id });
   }
+
+  /**
+   * Count UnitOrder Details
+   */
+
+  async unitOrderDetailsCount(id: number): Promise<UnitOrderSerializer> {
+    return this.unitRepository
+      .createQueryBuilder('unit_order')
+      .loadRelationCountAndMap(
+        'unit_order.unitOrderDetailsCount',
+        'unit_order.unitOrderDetails'
+      )
+      .where('unit_order.id = :id', { id: id })
+      .getOne();
+  }
 }
