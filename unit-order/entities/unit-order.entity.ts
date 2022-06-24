@@ -19,6 +19,7 @@ export class UnitOrderEntity extends CustomBaseEntity {
     }
   )
   unitOrderDetails: UnitOrderDetailEntity[];
+  unitOrderDetailsCount: number;
 
   @Column({ type: 'varchar', length: 80, nullable: true })
   operator_name: string;
