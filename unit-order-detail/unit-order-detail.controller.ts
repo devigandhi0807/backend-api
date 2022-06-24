@@ -13,7 +13,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import { Request } from 'express';
-import { ApiBearerAuth, ApiTags, ApiBody } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, ApiBody, ApiParam } from '@nestjs/swagger';
 
 import { UnitOrderDetailService } from 'src/unit-order-detail/unit-order-detail.service';
 import { CreateUnitOrderDetailDto } from 'src/unit-order-detail/dto/create-unit-order-detail.dto';
@@ -24,18 +24,24 @@ import { JwtAuthGuard } from 'src/common/guard/jwt-auth.guard';
 
 import { UnitOrderDetailFilterDto } from './dto/unit-order-detail-filter.dto';
 import { UpdateUnitOrderDetailDto } from './dto/update-unit-order-detail.dto';
+import { PermissionGuard } from 'src/common/guard/permission.guard';
 
-@ApiTags(':id/Unit-Order-Detail')
+@ApiTags(':uoId/Unit-Order-Detail')
 //@UseGuards(JwtTwoFactorGuard)
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
-@Controller(':id/unit-order-detail')
+@Controller(':uoId/unit-order-detail')
 export class UnitOrderDetailController {
   constructor(
     private readonly unitOrderDetailService: UnitOrderDetailService
   ) {}
 
   @Post()
+  @ApiParam({
+    name: 'uoId',
+    type: 'String',
+    required: true
+  })
   @ApiBody({
     schema: {
       type: 'object',
@@ -79,8 +85,6 @@ export class UnitOrderDetailController {
     }
   })
   createUnitOrderDetail(
-    @Param('id')
-    id: string,
     @Req()
     req: Request,
     @Body()
@@ -89,6 +93,10 @@ export class UnitOrderDetailController {
     const userInfo = req.user;
 
     createUnitOrderDetailDto.created_by = userInfo;
+
+    req.params.id = req.params.uoId;
+    delete req.params.uoId;
+    //console.log(req.params);
     createUnitOrderDetailDto.Unit_order_id = req.params;
     // if (userInfo.hasOwnProperty('name')) {
     //   createUnitOrderDto.created_by = userInfo['name'];
