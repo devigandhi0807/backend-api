@@ -20,6 +20,8 @@ import { IHSMonthProdEntity } from 'src/ihs-month-prod/entities/ihs-month-prod.e
 import { IHSProdByFieldOprEntity } from 'src/ihs-prod-by-field-opr/entities/ihs-prod-by-field-opr.entity';
 import { IHSProdHeaderEntity } from 'src/ihsprod-header/entities/ihsprod-header.entity';
 import { UnitOrderEntity } from 'src/unit-order/entities/unit-order.entity';
+import { IhsannualprodEntity } from 'src/ihsannualprod/entities/ihsannualprod.entity';
+import { UnitOrderDetailEntity } from 'src/unit-order-detail/entities/unit-order-detail.entity';
 
 /**
  * User Entity
@@ -139,10 +141,28 @@ export class UserEntity extends CustomBaseEntity {
   updateHeaders: IHSProdHeaderEntity[];
 
   @OneToMany(() => UnitOrderEntity, (unitOrder) => unitOrder.created_by)
-  crearteOrders: IHSProdHeaderEntity[];
+  createOrders: UnitOrderEntity[];
 
   @OneToMany(() => UnitOrderEntity, (unitOrder) => unitOrder.updated_by)
-  updateOrders: IHSProdHeaderEntity[];
+  updateOrders: UnitOrderEntity[];
+
+  @OneToMany(
+    () => UnitOrderDetailEntity,
+    (unitOrderDetail) => unitOrderDetail.created_by
+  )
+  createOrderDetails: UnitOrderDetailEntity[];
+
+  @OneToMany(
+    () => UnitOrderDetailEntity,
+    (unitOrderDetail) => unitOrderDetail.updated_by
+  )
+  updateOrderDetails: UnitOrderDetailEntity[];
+
+  @OneToMany(() => IhsannualprodEntity, (annuelProd) => annuelProd.created_by)
+  createAnnuelProds: IhsannualprodEntity[];
+
+  @OneToMany(() => IhsannualprodEntity, (annuelProd) => annuelProd.updated_by)
+  updateAnnuelProds: IhsannualprodEntity[];
 
   @BeforeInsert()
   async hashPasswordBeforeInsert() {
