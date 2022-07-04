@@ -154,53 +154,62 @@ export class CreateIHSProdByFieldOprDto {
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   oil_cum: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   gas_cum: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   wtr_cum: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   oil_ytd: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   gas_ytd: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   wtr_ytd: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   oil_latest_mo: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   gas_latest_mo: number;
 
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(99999999.99, { message: 'max-{"dg":99999999.99}' })
   wtr_latest_mo: number;
 
   @IsNotEmpty()
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(9999, { message: 'max-{"dg":4}' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
   @Type(() => Number)
   active_num_wells: number;
 
@@ -218,7 +227,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(99999999, { message: 'max-{"dg":8}' })
+  @Max(99999999, { message: 'max-{"dg":99999999}' })
   @Type(() => Number)
   td: number;
 
@@ -226,7 +235,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(99999999, { message: 'max-{"dg":8}' })
+  @Max(99999999, { message: 'max-{"dg":99999999}' })
   @Type(() => Number)
   tvd: number;
 
@@ -234,7 +243,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(99999999, { message: 'max-{"dg":8}' })
+  @Max(99999999, { message: 'max-{"dg":99999999}' })
   @Type(() => Number)
   upper_perf: number;
 
@@ -242,7 +251,7 @@ export class CreateIHSProdByFieldOprDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(99999999, { message: 'max-{"dg":8}' })
+  @Max(99999999, { message: 'max-{"dg":99999999}' })
   @Type(() => Number)
   lower_perf: number;
 
@@ -264,12 +273,16 @@ export class CreateIHSProdByFieldOprDto {
   @IsLatitude()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
   latitude: number;
 
   @IsLongitude()
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
   longitude: number;
 
   @IsNotEmpty()

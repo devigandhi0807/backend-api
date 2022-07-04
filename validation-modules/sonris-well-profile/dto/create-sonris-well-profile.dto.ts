@@ -136,7 +136,7 @@ export class CreateSonrisWellProfileDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(9999, { message: 'max-{"dg":4}' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
   @Type(() => Number)
   parish_code: number;
 
@@ -149,7 +149,7 @@ export class CreateSonrisWellProfileDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(9999, { message: 'max-{"dg":4}' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
   @Type(() => Number)
   district_code: number;
 
@@ -165,17 +165,25 @@ export class CreateSonrisWellProfileDto {
 
   @IsNotEmpty()
   @IsLatitude()
+  @ValidateIf((object, value) => value)
+  @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
   latitude: number;
 
   @IsNotEmpty()
   @IsLongitude()
+  @ValidateIf((object, value) => value)
+  @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
   longitude: number;
 
   @IsNotEmpty()
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(9999, { message: 'max-{"dg":4}' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
   @Type(() => Number)
   product_type_code: number;
 
@@ -187,6 +195,8 @@ export class CreateSonrisWellProfileDto {
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(9999999999.99, { message: 'max-{"dg":9999999999.99}' })
+  @Type(() => Number)
   usdw_value: number;
 
   @IsNotEmpty()

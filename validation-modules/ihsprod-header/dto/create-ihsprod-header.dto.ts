@@ -140,7 +140,7 @@ export class CreateIHSProdHeaderDto {
   @IsNumber()
   @ValidateIf((object, value) => value)
   @IsInt({ message: 'isInt' })
-  @Max(9999999999, { message: 'max-{"dg":10}' })
+  @Max(9999999999, { message: 'max-{"dg":9999999999}' })
   @Type(() => Number)
   lease_number: number;
 
@@ -232,6 +232,8 @@ export class CreateIHSProdHeaderDto {
   @IsNotEmpty()
   @ValidateIf((object, value) => value)
   @IsNumber({ maxDecimalPlaces: 4 }, { message: 'isDigP-{"dg":4}' })
+  @Max(999999.9999, { message: 'max-{"dg":999999.9999}' })
+  @Type(() => Number)
   temperature_gradient: number;
 
   @IsNotEmpty()
