@@ -1,5 +1,6 @@
 import { UserEntity } from 'src/auth/entity/user.entity';
 import { CustomBaseEntity } from 'src/common/entity/custom-base.entity';
+import { RecStatusEnum } from 'src/common/enum/rec_status.enum';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_prod_by_field_opr' })
@@ -44,7 +45,7 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
   state: string;
 
   @Column({ type: 'varchar', length: 30, nullable: true })
-  country_name: string;
+  county_name: string;
 
   @Column({ type: 'varchar', length: 80, nullable: true })
   basin: string;
@@ -65,74 +66,65 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
   lease_code: string;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   oil_cum: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   gas_cum: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   wtr_cum: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   oil_ytd: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   gas_ytd: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   wtr_ytd: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   oil_latest_mo: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   gas_latest_mo: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 10,
-    scale: 2,
-    default: 0.0
+    scale: 2
   })
   wtr_latest_mo: number;
 
@@ -140,14 +132,12 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
   active_num_wells: number;
 
   @Column({
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP'
+    type: 'timestamptz'
   })
   first_prod_date: Date;
 
   @Column({
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP'
+    type: 'timestamptz'
   })
   last_prod_date: Date;
 
@@ -170,24 +160,22 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
   gas_gatherer: string;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 12,
-    scale: 8,
-    default: 0.0
+    scale: 8
   })
   latitude: number;
 
   @Column({
-    type: 'numeric',
+    type: 'decimal',
     precision: 12,
-    scale: 8,
-    default: 0.0
+    scale: 8
   })
   longitude: number;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   l_and_l_srce: string;
 
-  @Column({ type: 'varchar', length: 5, default: 'A' })
-  rec_status: string;
+  @Column({ default: 'A' })
+  rec_status: RecStatusEnum;
 }
