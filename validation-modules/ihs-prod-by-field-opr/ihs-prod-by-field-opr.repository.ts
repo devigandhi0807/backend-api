@@ -85,6 +85,7 @@ export class IHSProdByFieldOprRepository extends BaseRepository<
           [key]: ILike(`%${searchFilter.keywords}%`)
         });
       }
+      return whereCondition;
     } else if (
       (searchFilter.hasOwnProperty('api') && searchFilter.api) ||
       (searchFilter.hasOwnProperty('lease_name') && searchFilter.lease_name) ||
@@ -101,13 +102,69 @@ export class IHSProdByFieldOprRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('production_status') &&
         searchFilter.production_status)
     ) {
-      for (const key of searchCriteria) {
+      if (searchFilter['api']) {
         whereCondition.push({
-          [key]: ILike(`%${searchFilter[key]}%`)
+          api: ILike(`%${searchFilter['api']}%`)
         });
       }
+      if (searchFilter['lease_name']) {
+        whereCondition.push({
+          lease_name: ILike(`%${searchFilter['lease_name']}%`)
+        });
+      }
+      if (searchFilter['well_num']) {
+        whereCondition.push({
+          well_num: ILike(`%${searchFilter['well_num']}%`)
+        });
+      }
+      if (searchFilter['operator_name']) {
+        whereCondition.push({
+          operator_name: ILike(`%${searchFilter['operator_name']}%`)
+        });
+      }
+      if (searchFilter['location']) {
+        whereCondition.push({
+          location: ILike(`%${searchFilter['location']}%`)
+        });
+      }
+      if (searchFilter['field_name']) {
+        whereCondition.push({
+          field_name: ILike(`%${searchFilter['field_name']}%`)
+        });
+      }
+      if (searchFilter['state']) {
+        whereCondition.push({
+          state: ILike(`%${searchFilter['state']}%`)
+        });
+      }
+      if (searchFilter['county_name']) {
+        whereCondition.push({
+          county_name: ILike(`%${searchFilter['county_name']}%`)
+        });
+      }
+      if (searchFilter['basin']) {
+        whereCondition.push({
+          basin: ILike(`%${searchFilter['basin']}%`)
+        });
+      }
+      if (searchFilter['play_name']) {
+        whereCondition.push({
+          play_name: ILike(`%${searchFilter['play_name']}%`)
+        });
+      }
+      if (searchFilter['production_status']) {
+        whereCondition.push({
+          production_status: ILike(`%${searchFilter['production_status']}%`)
+        });
+      }
+      const condition = whereCondition.reduce((acc, val) => {
+        const key = Object.keys(val)[0];
+        const value = Object.values(val)[0];
+        acc[key] = acc[key] ? [...acc[key], value] : value;
+        return acc;
+      }, {});
+      return condition;
     }
-    return whereCondition;
   }
   /**
    * transform single vol

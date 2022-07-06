@@ -10,7 +10,7 @@ export class IHSProdHeaderFilterDto extends PartialType(CommonSearchFieldDto) {
   @ApiPropertyOptional()
   @ValidateIf((object, value) => value)
   @IsString()
-  primary_product: number;
+  primary_product: string;
 
   @ApiPropertyOptional()
   @ValidateIf((object, value) => value)

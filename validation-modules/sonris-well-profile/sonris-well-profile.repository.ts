@@ -140,48 +140,95 @@ export class SonrisWellProfileRepository extends BaseRepository<
           district_code: parseInt(searchFilter['district_code'])
         });
       }
-      if (
-        searchFilter['operator_name'] !== undefined ||
-        searchFilter['field_name'] !== undefined ||
-        searchFilter['well_serial_num'] !== undefined ||
-        searchFilter['well_name'] !== undefined ||
-        searchFilter['lease_num'] !== undefined ||
-        searchFilter['well_status_code'] !== undefined ||
-        searchFilter['well_status_code_descr'] !== undefined ||
-        searchFilter['well_class_type_code'] !== undefined ||
-        searchFilter['well_class_type_code_descr'] !== undefined ||
-        searchFilter['api_num'] !== undefined ||
-        searchFilter['section'] !== undefined ||
-        searchFilter['township'] !== undefined ||
-        searchFilter['range'] !== undefined ||
-        searchFilter['effective_date'] !== undefined ||
-        searchFilter['permit_date'] !== undefined ||
-        searchFilter['spud_date'] !== undefined
-      ) {
+      if (searchFilter['operator_name']) {
         whereCondition.push({
-          operator_name: ILike(`%${searchFilter['operator_name']}%`),
-          field_name: ILike(`%${searchFilter['field_name']}%`),
-          well_serial_num: ILike(`%${searchFilter['well_serial_num']}%`),
-          well_name: ILike(`%${searchFilter['well_name']}%`),
-          well_num: ILike(`%${searchFilter['well_num']}%`),
-          lease_num: ILike(`%${searchFilter['lease_num']}%`),
-          well_status_code: ILike(`%${searchFilter['well_status_code']}%`),
+          operator_name: ILike(`%${searchFilter['operator_name']}%`)
+        });
+      }
+      if (searchFilter['field_name']) {
+        whereCondition.push({
+          field_name: ILike(`%${searchFilter['field_name']}%`)
+        });
+      }
+      if (searchFilter['well_serial_num']) {
+        whereCondition.push({
+          well_serial_num: ILike(`%${searchFilter['well_serial_num']}%`)
+        });
+      }
+      if (searchFilter['well_name']) {
+        whereCondition.push({
+          well_name: ILike(`%${searchFilter['well_name']}%`)
+        });
+      }
+      if (searchFilter['well_num']) {
+        whereCondition.push({
+          well_num: ILike(`%${searchFilter['well_num']}%`)
+        });
+      }
+      if (searchFilter['lease_num']) {
+        whereCondition.push({
+          lease_num: ILike(`%${searchFilter['lease_num']}%`)
+        });
+      }
+      if (searchFilter['well_status_code']) {
+        whereCondition.push({
+          well_status_code: ILike(`%${searchFilter['well_status_code']}%`)
+        });
+      }
+      if (searchFilter['well_status_code_descr']) {
+        whereCondition.push({
           well_status_code_descr: ILike(
             `%${searchFilter['well_status_code_descr']}%`
-          ),
+          )
+        });
+      }
+      if (searchFilter['well_class_type_code']) {
+        whereCondition.push({
           well_class_type_code: ILike(
             `%${searchFilter['well_class_type_code']}%`
-          ),
+          )
+        });
+      }
+      if (searchFilter['well_class_type_code_descr']) {
+        whereCondition.push({
           well_class_type_code_descr: ILike(
             `%${searchFilter['well_class_type_code_descr']}%`
-          ),
-          api_num: ILike(`%${searchFilter['api_num']}%`),
-          effective_date: new Date(searchFilter['effective_date']),
-          permit_date: new Date(searchFilter['permit_date']),
-          spud_date: new Date(searchFilter['spud_date']),
-          section: ILike(`%${searchFilter['section']}%`),
-          township: ILike(`%${searchFilter['township']}%`),
+          )
+        });
+      }
+      if (searchFilter['api_num']) {
+        whereCondition.push({
+          api_num: ILike(`%${searchFilter['api_num']}%`)
+        });
+      }
+      if (searchFilter['section']) {
+        whereCondition.push({
+          section: ILike(`%${searchFilter['section']}%`)
+        });
+      }
+      if (searchFilter['township']) {
+        whereCondition.push({
+          township: ILike(`%${searchFilter['township']}%`)
+        });
+      }
+      if (searchFilter['range'] !== undefined) {
+        whereCondition.push({
           range: ILike(`%${searchFilter['range']}%`)
+        });
+      }
+      if (searchFilter['effective_date'] !== undefined) {
+        whereCondition.push({
+          effective_date: new Date(searchFilter['effective_date'])
+        });
+      }
+      if (searchFilter['permit_date']) {
+        whereCondition.push({
+          permit_date: new Date(searchFilter['permit_date'])
+        });
+      }
+      if (searchFilter['spud_date']) {
+        whereCondition.push({
+          spud_date: new Date(searchFilter['spud_date'])
         });
       }
       const condition = whereCondition.reduce((acc, val) => {
@@ -190,9 +237,7 @@ export class SonrisWellProfileRepository extends BaseRepository<
         acc[key] = acc[key] ? [...acc[key], value] : value;
         return acc;
       }, {});
-      // console.log(condition);
 
-      // console.log(whereCondition);
       return condition;
     }
   }

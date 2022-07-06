@@ -87,6 +87,7 @@ export class IHSProdHeaderRepository extends BaseRepository<
           });
         }
       }
+      return whereCondition;
     } else if (
       (searchFilter.hasOwnProperty('api') && searchFilter.api) ||
       (searchFilter.hasOwnProperty('primary_product') &&
@@ -108,24 +109,75 @@ export class IHSProdHeaderRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('well_num') && searchFilter.well_num) ||
       (searchFilter.hasOwnProperty('location') && searchFilter.location)
     ) {
-      for (const key of searchCriteria) {
-        if (key === 'lease_number') {
-          if (!isNaN(parseInt(searchFilter[key]))) {
-            const val = parseInt(`${searchFilter[key]}`);
-
-            whereCondition.push({
-              [key]: Number(val)
-            });
-          }
-        } else {
-          whereCondition.push({
-            [key]: ILike(`%${searchFilter[key]}%`)
-          });
-        }
+      if (!isNaN(parseInt(searchFilter['lease_number']))) {
+        whereCondition.push({
+          lease_number: parseInt(searchFilter['lease_number'])
+        });
       }
+      if (searchFilter['api']) {
+        whereCondition.push({
+          api: ILike(`%${searchFilter['api']}%`)
+        });
+      }
+      if (searchFilter['primary_product']) {
+        whereCondition.push({
+          primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        });
+      }
+      if (searchFilter['province_state_name']) {
+        whereCondition.push({
+          province_state_name: ILike(`%${searchFilter['province_state_name']}%`)
+        });
+      }
+      if (searchFilter['district_name']) {
+        whereCondition.push({
+          district_name: ILike(`%${searchFilter['district_name']}%`)
+        });
+      }
+      if (searchFilter['county_name']) {
+        whereCondition.push({
+          county_name: ILike(`%${searchFilter['county_name']}%`)
+        });
+      }
+      if (searchFilter['operator_name']) {
+        whereCondition.push({
+          operator_name: ILike(`%${searchFilter['operator_name']}%`)
+        });
+      }
+      if (searchFilter['operator_city']) {
+        whereCondition.push({
+          operator_city: ILike(`%${searchFilter['operator_city']}%`)
+        });
+      }
+      if (searchFilter['field_name']) {
+        whereCondition.push({
+          field_name: ILike(`%${searchFilter['field_name']}%`)
+        });
+      }
+      if (searchFilter['lease_name']) {
+        whereCondition.push({
+          lease_name: ILike(`%${searchFilter['lease_name']}%`)
+        });
+      }
+      if (searchFilter['well_num']) {
+        whereCondition.push({
+          well_num: ILike(`%${searchFilter['well_num']}%`)
+        });
+      }
+      if (searchFilter['location']) {
+        whereCondition.push({
+          location: ILike(`%${searchFilter['location']}%`)
+        });
+      }
+      const condition = whereCondition.reduce((acc, val) => {
+        const key = Object.keys(val)[0];
+        const value = Object.values(val)[0];
+        acc[key] = acc[key] ? [...acc[key], value] : value;
+        return acc;
+      }, {});
+      //console.log(condition);
+      return condition;
     }
-    //console.log(whereCondition);
-    return whereCondition;
   }
   /**
    * transform single vol

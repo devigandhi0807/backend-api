@@ -1,5 +1,6 @@
 import { UserEntity } from 'src/auth/entity/user.entity';
 import { CustomBaseEntity } from 'src/common/entity/custom-base.entity';
+import { RecStatusEnum } from 'src/common/enum/rec_status.enum';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'ihs_prod_by_field_opr' })
@@ -175,6 +176,6 @@ export class IHSProdByFieldOprEntity extends CustomBaseEntity {
   @Column({ type: 'varchar', length: 20, nullable: true })
   l_and_l_srce: string;
 
-  @Column({ type: 'varchar', length: 5, default: 'A' })
-  rec_status: string;
+  @Column({ default: 'A' })
+  rec_status: RecStatusEnum;
 }
