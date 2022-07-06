@@ -81,12 +81,24 @@ export class SonrisWellProfileRepository extends BaseRepository<
               [key]: Number(val)
             });
           }
+        } else if (
+          key === 'effective_date' ||
+          key === 'permit_date' ||
+          key === 'spud_date'
+        ) {
+          if (!isNaN(searchFilter.keywords)) {
+            const val = new Date(`${searchFilter.keywords}`);
+            whereCondition.push({
+              [key]: val
+            });
+          }
         } else {
           whereCondition.push({
             [key]: ILike(`%${searchFilter.keywords}%`)
           });
         }
       }
+      return whereCondition;
     } else if (
       (searchFilter.hasOwnProperty('operator_name') &&
         searchFilter.operator_name) ||
@@ -118,25 +130,73 @@ export class SonrisWellProfileRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('district_code') &&
         searchFilter.district_code)
     ) {
-      for (const key of searchCriteria) {
-        if (key === 'parish_code' || key === 'district_code') {
-          if (!isNaN(parseInt(searchFilter[key]))) {
-            const val = parseInt(`${searchFilter[key]}`);
-
-            whereCondition.push({
-              [key]: Number(val)
-            });
-          }
-        } else {
-          whereCondition.push({
-            [key]: ILike(`%${searchFilter[key]}%`)
-          });
-        }
+      if (!isNaN(parseInt(searchFilter['parish_code']))) {
+        whereCondition.push({
+          parish_code: parseInt(searchFilter['parish_code'])
+        });
       }
+      if (!isNaN(parseInt(searchFilter['district_code']))) {
+        whereCondition.push({
+          district_code: parseInt(searchFilter['district_code'])
+        });
+      }
+      if (
+        searchFilter['operator_name'] !== undefined ||
+        searchFilter['field_name'] !== undefined ||
+        searchFilter['well_serial_num'] !== undefined ||
+        searchFilter['well_name'] !== undefined ||
+        searchFilter['lease_num'] !== undefined ||
+        searchFilter['well_status_code'] !== undefined ||
+        searchFilter['well_status_code_descr'] !== undefined ||
+        searchFilter['well_class_type_code'] !== undefined ||
+        searchFilter['well_class_type_code_descr'] !== undefined ||
+        searchFilter['api_num'] !== undefined ||
+        searchFilter['section'] !== undefined ||
+        searchFilter['township'] !== undefined ||
+        searchFilter['range'] !== undefined ||
+        searchFilter['effective_date'] !== undefined ||
+        searchFilter['permit_date'] !== undefined ||
+        searchFilter['spud_date'] !== undefined
+      ) {
+        whereCondition.push({
+          operator_name: ILike(`%${searchFilter['operator_name']}%`),
+          field_name: ILike(`%${searchFilter['field_name']}%`),
+          well_serial_num: ILike(`%${searchFilter['well_serial_num']}%`),
+          well_name: ILike(`%${searchFilter['well_name']}%`),
+          well_num: ILike(`%${searchFilter['well_num']}%`),
+          lease_num: ILike(`%${searchFilter['lease_num']}%`),
+          well_status_code: ILike(`%${searchFilter['well_status_code']}%`),
+          well_status_code_descr: ILike(
+            `%${searchFilter['well_status_code_descr']}%`
+          ),
+          well_class_type_code: ILike(
+            `%${searchFilter['well_class_type_code']}%`
+          ),
+          well_class_type_code_descr: ILike(
+            `%${searchFilter['well_class_type_code_descr']}%`
+          ),
+          api_num: ILike(`%${searchFilter['api_num']}%`),
+          effective_date: new Date(searchFilter['effective_date']),
+          permit_date: new Date(searchFilter['permit_date']),
+          spud_date: new Date(searchFilter['spud_date']),
+          section: ILike(`%${searchFilter['section']}%`),
+          township: ILike(`%${searchFilter['township']}%`),
+          range: ILike(`%${searchFilter['range']}%`)
+        });
+      }
+      const condition = whereCondition.reduce((acc, val) => {
+        const key = Object.keys(val)[0];
+        const value = Object.values(val)[0];
+        acc[key] = acc[key] ? [...acc[key], value] : value;
+        return acc;
+      }, {});
+      // console.log(condition);
+
+      // console.log(whereCondition);
+      return condition;
     }
-    //console.log(whereCondition);
-    return whereCondition;
   }
+
   /**
    * transform single vol
    * @param model
