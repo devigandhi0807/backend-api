@@ -43,7 +43,7 @@ export class IhsProdByFieldOprService
       ]
     );
   }
-  findOne(id: number): Promise<IHSProdByFieldOprSerializer> {
+  async findOne(id: number): Promise<IHSProdByFieldOprSerializer> {
     return this.fieldOprRepository.get(id, ['created_by', 'updated_by']);
   }
   async update(
