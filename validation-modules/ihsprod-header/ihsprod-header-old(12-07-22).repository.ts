@@ -1,4 +1,4 @@
-import { EntityRepository, ILike, In } from 'typeorm';
+import { EntityRepository, ILike } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -110,113 +110,63 @@ export class IHSProdHeaderRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('location') && searchFilter.location)
     ) {
       if (!isNaN(parseInt(searchFilter['lease_number']))) {
-        const lnum_values = searchFilter['lease_number']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          lease_number: In([...lnum_values])
+          lease_number: parseInt(searchFilter['lease_number'])
         });
       }
       if (searchFilter['api']) {
-        const api_values = searchFilter['api'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          //api: ILike(`%${searchFilter['api']}%`)
-          api: In([...api_values])
+          api: ILike(`%${searchFilter['api']}%`)
         });
       }
       if (searchFilter['primary_product']) {
-        const pp_values = searchFilter['primary_product']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          primary_product: In([...pp_values])
+          primary_product: ILike(`%${searchFilter['primary_product']}%`)
         });
       }
       if (searchFilter['province_state_name']) {
-        const psn_values = searchFilter['province_state_name']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          province_state_name: In([...psn_values])
+          province_state_name: ILike(`%${searchFilter['province_state_name']}%`)
         });
       }
       if (searchFilter['district_name']) {
-        const dn_values = searchFilter['district_name']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          district_name: In([...dn_values])
+          district_name: ILike(`%${searchFilter['district_name']}%`)
         });
       }
       if (searchFilter['county_name']) {
-        const cn_values = searchFilter['county_name'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          county_name: In([...cn_values])
+          county_name: ILike(`%${searchFilter['county_name']}%`)
         });
       }
       if (searchFilter['operator_name']) {
-        const on_values = searchFilter['operator_name']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          operator_name: In([...on_values])
+          operator_name: ILike(`%${searchFilter['operator_name']}%`)
         });
       }
       if (searchFilter['operator_city']) {
-        const oc_values = searchFilter['operator_city']
-          .split(',')
-          .map((val) => {
-            return val.trim();
-          });
         whereCondition.push({
-          operator_city: In([...oc_values])
+          operator_city: ILike(`%${searchFilter['operator_city']}%`)
         });
       }
       if (searchFilter['field_name']) {
-        const fn_values = searchFilter['field_name'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          field_name: In([...fn_values])
+          field_name: ILike(`%${searchFilter['field_name']}%`)
         });
       }
       if (searchFilter['lease_name']) {
-        const ln_values = searchFilter['lease_name'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          lease_name: In([...ln_values])
+          lease_name: ILike(`%${searchFilter['lease_name']}%`)
         });
       }
       if (searchFilter['well_num']) {
-        const wnum_values = searchFilter['well_num'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          well_num: In([...wnum_values])
+          well_num: ILike(`%${searchFilter['well_num']}%`)
         });
       }
       if (searchFilter['location']) {
-        const loc_values = searchFilter['location'].split(',').map((val) => {
-          return val.trim();
-        });
         whereCondition.push({
-          location: In([...loc_values])
+          location: ILike(`%${searchFilter['location']}%`)
         });
       }
       const condition = whereCondition.reduce((acc, val) => {
@@ -225,7 +175,7 @@ export class IHSProdHeaderRepository extends BaseRepository<
         acc[key] = acc[key] ? [...acc[key], value] : value;
         return acc;
       }, {});
-      // console.log(condition);
+      //console.log(condition);
       return condition;
     }
   }
