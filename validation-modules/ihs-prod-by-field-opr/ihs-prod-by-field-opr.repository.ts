@@ -1,4 +1,4 @@
-import { EntityRepository, ILike } from 'typeorm';
+import { EntityRepository, ILike, In } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -103,58 +103,95 @@ export class IHSProdByFieldOprRepository extends BaseRepository<
         searchFilter.production_status)
     ) {
       if (searchFilter['api']) {
+        const api_values = searchFilter['api'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          api: ILike(`%${searchFilter['api']}%`)
+          api: In([...api_values])
         });
       }
       if (searchFilter['lease_name']) {
+        const ln_values = searchFilter['lease_name'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          lease_name: ILike(`%${searchFilter['lease_name']}%`)
+          lease_name: In([...ln_values])
         });
       }
       if (searchFilter['well_num']) {
+        const wnum_values = searchFilter['well_num'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          well_num: ILike(`%${searchFilter['well_num']}%`)
+          well_num: In([...wnum_values])
         });
       }
       if (searchFilter['operator_name']) {
+        const on_values = searchFilter['operator_name']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          operator_name: ILike(`%${searchFilter['operator_name']}%`)
+          operator_name: In([...on_values])
         });
       }
       if (searchFilter['location']) {
+        const loc_values = searchFilter['location'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          location: ILike(`%${searchFilter['location']}%`)
+          location: In([...loc_values])
         });
       }
       if (searchFilter['field_name']) {
+        const fn_values = searchFilter['field_name'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          field_name: ILike(`%${searchFilter['field_name']}%`)
+          field_name: In([...fn_values])
         });
       }
       if (searchFilter['state']) {
+        const st_values = searchFilter['state'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          state: ILike(`%${searchFilter['state']}%`)
+          state: In([...st_values])
         });
       }
       if (searchFilter['county_name']) {
+        const cn_values = searchFilter['county_name'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          county_name: ILike(`%${searchFilter['county_name']}%`)
+          county_name: In([...cn_values])
         });
       }
       if (searchFilter['basin']) {
+        const b_values = searchFilter['basin'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          basin: ILike(`%${searchFilter['basin']}%`)
+          basin: In([...b_values])
         });
       }
       if (searchFilter['play_name']) {
+        const pl_values = searchFilter['play_name'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          play_name: ILike(`%${searchFilter['play_name']}%`)
+          play_name: In([...pl_values])
         });
       }
       if (searchFilter['production_status']) {
+        const ps_values = searchFilter['production_status']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          production_status: ILike(`%${searchFilter['production_status']}%`)
+          production_status: In([...ps_values])
         });
       }
       const condition = whereCondition.reduce((acc, val) => {

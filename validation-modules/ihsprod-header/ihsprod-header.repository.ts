@@ -1,4 +1,12 @@
-import { EntityRepository, ILike, In } from 'typeorm';
+import {
+  EntityRepository,
+  ILike,
+  In,
+  LessThan,
+  LessThanOrEqual,
+  MoreThan,
+  MoreThanOrEqual
+} from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -109,6 +117,48 @@ export class IHSProdHeaderRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('well_num') && searchFilter.well_num) ||
       (searchFilter.hasOwnProperty('location') && searchFilter.location)
     ) {
+      if (
+        !isNaN(parseInt(searchFilter['lease_number'])) &&
+        searchFilter['lease_number'].includes('>')
+      ) {
+        if (searchFilter['lease_number'].startsWith('=', 1)) {
+          const lease_number = parseInt(
+            searchFilter['lease_number'].substring(2)
+          );
+          whereCondition.push({
+            lease_number: MoreThanOrEqual(lease_number)
+          });
+        } else {
+          const lease_number = parseInt(
+            searchFilter['lease_number'].substring(1)
+          );
+          whereCondition.push({
+            lease_number: MoreThan(lease_number)
+          });
+        }
+      }
+
+      if (
+        !isNaN(parseInt(searchFilter['lease_number'])) &&
+        searchFilter['lease_number'].includes('<')
+      ) {
+        if (searchFilter['lease_number'].startsWith('=', 1)) {
+          const lease_number = parseInt(
+            searchFilter['lease_number'].substring(2)
+          );
+          whereCondition.push({
+            lease_number: LessThanOrEqual(lease_number)
+          });
+        } else {
+          const lease_number = parseInt(
+            searchFilter['lease_number'].substring(1)
+          );
+          whereCondition.push({
+            lease_number: LessThan(lease_number)
+          });
+        }
+      }
+
       if (!isNaN(parseInt(searchFilter['lease_number']))) {
         const lnum_values = searchFilter['lease_number']
           .split(',')
