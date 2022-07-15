@@ -1,4 +1,4 @@
-import { EntityRepository, ILike } from 'typeorm';
+import { EntityRepository, ILike, In } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -63,23 +63,40 @@ export class UnitOrderRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('county_name') && searchFilter.county_name)
     ) {
       if (searchFilter['county_name']) {
-        whereCondition.push({
-          county_name: searchFilter['county_name']
+        const cn_values = searchFilter['county_name'].split('-').map((val) => {
+          return '{' + val.trim() + '}';
         });
+        whereCondition.push({
+          county_name: In([...cn_values])
+        });
+        // whereCondition.push({
+        //   county_name: searchFilter['county_name']
+        // });
       }
       if (searchFilter['operator_name']) {
+        const on_values = searchFilter['operator_name']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          operator_name: ILike(`%${searchFilter['operator_name']}%`)
+          operator_name: In([...on_values])
         });
       }
       if (searchFilter['township']) {
+        const town_values = searchFilter['township'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          township: ILike(`%${searchFilter['township']}%`)
+          township: In([...town_values])
         });
       }
       if (searchFilter['section']) {
+        const section_values = searchFilter['section'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          section: ILike(`%${searchFilter['section']}%`)
+          section: In([...section_values])
         });
       }
 

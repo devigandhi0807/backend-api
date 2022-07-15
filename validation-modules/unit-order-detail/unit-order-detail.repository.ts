@@ -81,31 +81,50 @@ export class UnitOrderDetailRepository extends BaseRepository<
       (searchFilter.hasOwnProperty('county_name') && searchFilter.county_name)
     ) {
       if (!isNaN(parseInt(searchFilter['Unit_order_id']))) {
+        const uoi_values = searchFilter['Unit_order_id']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          Unit_order_id: parseInt(searchFilter['Unit_order_id'])
+          Unit_order_id: In([...uoi_values])
         });
       }
       if (!isNaN(parseInt(searchFilter['interest_type']))) {
+        const it_values = searchFilter['interest_type']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          interest_type: parseInt(searchFilter['interest_type'])
+          interest_type: In([...it_values])
         });
       }
       if (searchFilter['tract_no']) {
+        const tn_values = searchFilter['tract_no'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          tract_no: ILike(`%${searchFilter['tract_no']}%`)
+          tract_no: In([...tn_values])
         });
       }
       if (searchFilter['ownership_display_name']) {
+        const odn_values = searchFilter['ownership_display_name']
+          .split(',')
+          .map((val) => {
+            return val.trim();
+          });
         whereCondition.push({
-          ownership_display_name: ILike(
-            `%${searchFilter['ownership_display_name']}%`
-          )
+          ownership_display_name: In([...odn_values])
         });
       }
 
       if (searchFilter['county_name']) {
+        const cn_values = searchFilter['county_name'].split(',').map((val) => {
+          return val.trim();
+        });
         whereCondition.push({
-          county_name: ILike(`%${searchFilter['county_name']}%`)
+          county_name: In([...cn_values])
         });
       }
       const condition = whereCondition.reduce((acc, val) => {
@@ -114,7 +133,7 @@ export class UnitOrderDetailRepository extends BaseRepository<
         acc[key] = acc[key] ? [...acc[key], value] : value;
         return acc;
       }, {});
-      console.log(condition);
+      //console.log(condition);
       return condition;
     }
   }

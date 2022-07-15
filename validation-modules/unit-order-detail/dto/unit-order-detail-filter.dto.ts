@@ -13,12 +13,12 @@ export class UnitOrderDetailFilterDto extends PartialType(
   @ApiPropertyOptional()
   @ValidateIf((object, value) => value)
   @IsString()
-  Unit_order_id: number;
+  Unit_order_id: string;
 
   @ApiPropertyOptional()
   @ValidateIf((object, value) => value)
   @IsString()
-  interest_type: number;
+  interest_type: string;
 
   @ApiPropertyOptional()
   @ValidateIf((object, value) => value)
