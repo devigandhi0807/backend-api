@@ -1,0 +1,224 @@
+import { ApiHideProperty } from '@nestjs/swagger';
+import {
+  IsOptional,
+  IsNumber,
+  IsString,
+  IsIn,
+  MaxLength,
+  IsDate,
+  ValidateIf,
+  IsInt,
+  Max,
+  IsLatitude,
+  IsLongitude
+} from 'class-validator';
+import { UserEntity } from 'src/auth/entity/user.entity';
+import { DeepPartial } from 'typeorm';
+import { RecStatusEnum } from 'src/common/enum/rec_status.enum';
+import { Type } from 'class-transformer';
+const statusEnumArray = [RecStatusEnum.ACTIVE, RecStatusEnum.DELETED];
+
+export class CreateSonrisWellProfileDto {
+  @ApiHideProperty()
+  @IsOptional()
+  @IsNumber()
+  created_by: DeepPartial<UserEntity>;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80, { message: 'maxLength-{"ln":80,"count":80}' })
+  operator_name: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  operator_id: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  field_id: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(40, { message: 'maxLength-{"ln":40,"count":40}' })
+  field_name: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  well_serial_num: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80, { message: 'maxLength-{"ln":80,"count":80}' })
+  well_name: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  well_num: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  lease_num: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(5, { message: 'maxLength-{"ln":5,"count":5}' })
+  well_status_code: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(30, { message: 'maxLength-{"ln":30,"count":30}' })
+  well_status_code_descr: string;
+
+  @IsOptional()
+  @IsString()
+  classification: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(5, { message: 'maxLength-{"ln":5,"count":5}' })
+  well_class_type_code: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(30, { message: 'maxLength-{"ln":30,"count":30}' })
+  well_class_type_code_descr: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  api_num: string;
+
+  @ValidateIf((object, value) => value)
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  effective_date: Date;
+
+  @ValidateIf((object, value) => value)
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  permit_date: Date;
+
+  @ValidateIf((object, value) => value)
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  spud_date: Date;
+
+  @ValidateIf((object, value) => value)
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  well_status_date: Date;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  section: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  township: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  range: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(10, { message: 'maxLength-{"ln":10,"count":10}' })
+  meridian: string;
+
+  @IsOptional()
+  @ValidateIf((object, value) => value)
+  @IsNumber()
+  @ValidateIf((object, value) => value)
+  @IsInt({ message: 'isInt' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
+  @Type(() => Number)
+  parish_code: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80, { message: 'maxLength-{"ln":80,"count":80}' })
+  parish_name: string;
+
+  @IsOptional()
+  @ValidateIf((object, value) => value)
+  @IsNumber()
+  @ValidateIf((object, value) => value)
+  @IsInt({ message: 'isInt' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
+  @Type(() => Number)
+  district_code: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80, { message: 'maxLength-{"ln":80,"count":80}' })
+  district_name: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  ground_elevation: string;
+
+  @IsOptional()
+  @IsLatitude()
+  @ValidateIf((object, value) => value)
+  @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
+  latitude: number;
+
+  @IsOptional()
+  @IsLongitude()
+  @ValidateIf((object, value) => value)
+  @IsNumber({ maxDecimalPlaces: 8 }, { message: 'isDigP-{"dg":8}' })
+  @Max(9999.99999999, { message: 'max-{"dg":9999.99999999}' })
+  @Type(() => Number)
+  longitude: number;
+
+  @IsOptional()
+  @ValidateIf((object, value) => value)
+  @IsNumber()
+  @ValidateIf((object, value) => value)
+  @IsInt({ message: 'isInt' })
+  @Max(9999, { message: 'max-{"dg":9999}' })
+  @Type(() => Number)
+  product_type_code: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80, { message: 'maxLength-{"ln":80,"count":80}' })
+  product_type_code_descr: string;
+
+  @IsOptional()
+  @ValidateIf((object, value) => value)
+  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'isDigP-{"dg":2}' })
+  @Max(9999999999.99, { message: 'max-{"dg":9999999999.99}' })
+  @Type(() => Number)
+  usdw_value: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  area_usdw_value: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(20, { message: 'maxLength-{"ln":20,"count":20}' })
+  source_area_usdw_value: string;
+
+  @IsIn(statusEnumArray, {
+    message: `isIn-{"items":"${statusEnumArray.join(',')}"}`
+  })
+  rec_status: RecStatusEnum;
+}
