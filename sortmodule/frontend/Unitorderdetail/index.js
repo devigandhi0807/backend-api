@@ -327,9 +327,9 @@ function UnitOrderDetail() {
   //   close();
   // };
 
-  const handleCancelClick = () => {
-    setEditUodId(null);
-  };
+  // const handleCancelClick = () => {
+  //   setEditUodId(null);
+  // };
 
   const style = {
     background: '#fafafa',
@@ -342,13 +342,7 @@ function UnitOrderDetail() {
 
   console.log(unitorderdetails);
   //const uodData = [];
-  const uodData = unitorderdetails.map((uod, i) => {
-    if (uod !== undefined) {
-      return { ...uod, key: uod.id };
-    } else {
-      return { ...uod, key: i };
-    }
-  });
+  const uodData = unitorderdetails.map((uod, i) => ({ ...uod, key: uod.id }));
 
   const handleDelete = (key) => {
     const newUODs = [...uodData];
@@ -368,8 +362,6 @@ function UnitOrderDetail() {
   };
   const save = async (key) => {
     const row = await form.validateFields();
-
-    // dispatch(setFormValues({ ...row }));
     dispatch(submitFormAction());
     const newUODs = [...uodData];
 
