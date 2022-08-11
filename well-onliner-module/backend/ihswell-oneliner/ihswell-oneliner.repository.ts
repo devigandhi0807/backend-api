@@ -1,4 +1,4 @@
-import { EntityRepository, ILike, In } from 'typeorm';
+import { EntityRepository, ILike } from 'typeorm';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 import { BaseRepository } from 'src/common/repository/base.repository';
@@ -50,19 +50,30 @@ export class IhswellOnelinerRepository extends BaseRepository<
         const source_values = searchFilter['source'].split(',').map((val) => {
           return val.trim();
         });
-        whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          source: In([...source_values])
+        source_values.map((val) => {
+          return whereCondition.push({
+            source: ILike(`%${val}%`)
+          });
         });
+        //   whereCondition.push({
+        //     //primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        //     source: ILike(In([...source_values]))
+        //   });
       }
       if (searchFilter['api_number']) {
         const api_values = searchFilter['api_number'].split(',').map((val) => {
           return val.trim();
         });
-        whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          api_number: In([...api_values])
+        api_values.map((val) => {
+          return whereCondition.push({
+            api_number: ILike(`%${val}%`)
+          });
         });
+
+        // whereCondition.push({
+        //   //primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        //   api_number: In([...api_values])
+        // });
       }
 
       if (searchFilter['operator_name']) {
@@ -71,10 +82,15 @@ export class IhswellOnelinerRepository extends BaseRepository<
           .map((val) => {
             return val.trim();
           });
-        whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          operator_name: In([...opn_values])
+        opn_values.map((val) => {
+          return whereCondition.push({
+            operator_name: ILike(`%${val}%`)
+          });
         });
+        // whereCondition.push({
+        //   //primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        //   operator_name: In([...opn_values])
+        // });
       }
       if (searchFilter['current_operator_city']) {
         const coc_values = searchFilter['current_operator_city']
@@ -82,29 +98,39 @@ export class IhswellOnelinerRepository extends BaseRepository<
           .map((val) => {
             return val.trim();
           });
-        whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          current_operator_city: In([...coc_values])
+        coc_values.map((val) => {
+          return whereCondition.push({
+            current_operator_city: ILike(`%${val}%`)
+          });
         });
+        // whereCondition.push({
+        //   //primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        //   current_operator_city: In([...coc_values])
+        // });
       }
       if (searchFilter['basin_code']) {
         const bc_values = searchFilter['basin_code'].split(',').map((val) => {
           return val.trim();
         });
-        whereCondition.push({
-          //primary_product: ILike(`%${searchFilter['primary_product']}%`)
-          basin_code: In([...bc_values])
+        bc_values.map((val) => {
+          return whereCondition.push({
+            basin_code: ILike(`%${val}%`)
+          });
         });
+        // whereCondition.push({
+        //   //primary_product: ILike(`%${searchFilter['primary_product']}%`)
+        //   basin_code: In([...bc_values])
+        // });
       }
 
-      const condition = whereCondition.reduce((acc, val) => {
-        const key = Object.keys(val)[0];
-        const value = Object.values(val)[0];
-        acc[key] = acc[key] ? [...acc[key], value] : value;
-        return acc;
-      }, {});
+      // const condition = whereCondition.reduce((acc, val) => {
+      //   const key = Object.keys(val)[0];
+      //   const value = Object.values(val)[0];
+      //   acc[key] = acc[key] ? [...acc[key], value] : value;
+      //   return acc;
+      // }, {});
       // console.log(condition);
-      return condition;
+      return whereCondition;
     }
   }
   /**
