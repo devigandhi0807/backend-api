@@ -2,6 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as AWS from 'aws-sdk';
 import { Provider } from '@nestjs/common';
 import { UploadedMulterFileInterface } from 'src/common/interfaces/upload-multer-file.interface';
+
+// Set the AWS Region.
+const REGION = 'us-east-1';
+
 // Unique identifier of the service in the dependency injection layer
 const SpaceManagerServiceLib = 'lib:do-spaces-service';
 
@@ -9,7 +13,7 @@ const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com');
 
 const S3 = new AWS.S3({
   endpoint: spacesEndpoint.href,
-  region: 'us-east-1',
+  region: REGION,
   credentials: new AWS.Credentials({
     accessKeyId: 'BTAN2JJ2RL6IBF53DU4K',
     secretAccessKey: 'uflztKewteaAzaZ+eQqcAT39z8Cs33y6wJoyGYS5XhE'
@@ -54,5 +58,19 @@ export class SpaceManagerService {
         }
       );
     });
+  }
+
+  async findAll() {
+    try {
+      const data = await this.s3
+        .listObjectsV2({ Bucket: 'hydraftc' })
+        .promise();
+
+      const bodyContents = await data;
+      //console.log(bodyContents);
+      return bodyContents;
+    } catch (err) {
+      console.log('Space Manager Listing Error', err);
+    }
   }
 }

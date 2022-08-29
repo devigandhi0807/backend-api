@@ -2,7 +2,8 @@ import {
   Controller,
   UploadedFile,
   UseInterceptors,
-  Post
+  Post,
+  Get
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
@@ -31,5 +32,9 @@ export class SpaceManagerController {
   async uploadFile(@UploadedFile() file: UploadedMulterFileInterface) {
     const url = await this.spaceManagerService.uploadFile(file);
     return { url };
+  }
+  @Get()
+  findAll() {
+    return this.spaceManagerService.findAll();
   }
 }
